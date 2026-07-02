@@ -8,28 +8,8 @@ import { AppLoadingScreen } from "@/components/ui/AppLoadingScreen";
 import { LoginBrandPanel } from "@/components/auth/LoginBrandPanel";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { checkBackendHealth, getApiErrorMessage, login } from "@/services/api";
+import { getApiErrorMessage, login } from "@/services/api";
 import { getOperator, getToken, roleDashboardPath, saveSession } from "@/lib/auth";
-
-function StatusDot({ status }: { status: "checking" | "online" | "offline" }) {
-  const colors = {
-    checking: "bg-slate-300",
-    online: "bg-emerald-500",
-    offline: "bg-red-500",
-  };
-  const labels = {
-    checking: "Connecting…",
-    online: "API connected",
-    offline: "API offline",
-  };
-
-  return (
-    <span className="inline-flex items-center gap-2 text-xs text-slate-500">
-      <span className={`h-1.5 w-1.5 rounded-full ${colors[status]}`} />
-      {labels[status]}
-    </span>
-  );
-}
 
 export default function LoginPage() {
   const router = useRouter();
@@ -39,24 +19,6 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [sessionChecked, setSessionChecked] = useState(false);
   const [redirecting, setRedirecting] = useState(false);
-
-  const [backendStatus, setBackendStatus] = useState<"checking" | "online" | "offline">(
-    "checking",
-  );
-
-  useEffect(() => {
-    let active = true;
-    checkBackendHealth()
-      .then(() => {
-        if (active) setBackendStatus("online");
-      })
-      .catch(() => {
-        if (active) setBackendStatus("offline");
-      });
-    return () => {
-      active = false;
-    };
-  }, []);
 
   useEffect(() => {
     const token = getToken();
@@ -103,7 +65,6 @@ export default function LoginPage() {
               <ArrowLeft className="h-4 w-4" aria-hidden />
               Back to home
             </Link>
-            <StatusDot status={backendStatus} />
             <h2 className="mt-4 text-display-md text-slate-900">Operator sign in</h2>
             <p className="mt-2 text-sm text-slate-600">
               For washing station, exporter, warehouse, port, and admin accounts.

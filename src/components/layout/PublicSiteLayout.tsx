@@ -86,20 +86,27 @@ export function PublicSiteLayout({ children, showFooter = true }: Props) {
       <div className="flex-1">{children}</div>
 
       {showFooter ? (
-        <footer className="border-t border-forest/10 bg-white/70">
-          <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 text-sm text-slate-600 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-            <p>
-              <span className="font-semibold text-forest">{APP_NAME}</span>
-              <span className="text-slate-400"> · </span>
+        <footer className="bg-[#0f2e22] text-white">
+          <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 text-sm lg:flex-row lg:items-center lg:justify-between lg:px-8">
+            <p className="text-white/70">
+              <span className="font-semibold text-white">{APP_NAME}</span>
+              <span className="text-white/35"> · </span>
               Traceable Rwanda coffee from farm to port.
             </p>
             <div className="flex flex-wrap gap-x-4 gap-y-2">
               {PUBLIC_UTILITY_NAV.map(({ path, label }) => (
-                <Link key={path} href={path} className="font-medium text-forest hover:underline">
+                <Link
+                  key={path}
+                  href={path}
+                  className="font-medium text-white/75 transition hover:text-white hover:underline"
+                >
                   {label}
                 </Link>
               ))}
-              <Link href={LOGIN_NAV.path} className="font-medium text-forest hover:underline">
+              <Link
+                href={LOGIN_NAV.path}
+                className="font-medium text-white/75 transition hover:text-white hover:underline"
+              >
                 {LOGIN_NAV.label}
               </Link>
             </div>
