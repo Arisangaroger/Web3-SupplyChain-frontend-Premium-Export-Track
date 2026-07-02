@@ -6,7 +6,7 @@ import coffeeImage from "@/images/coffee.png";
 export function CoffeeHeroVisual() {
   return (
     <div
-      className="coffee-hero-image relative mx-auto flex aspect-square w-full max-w-[18.625rem] items-center justify-center sm:max-w-[20.625rem] lg:max-w-[22.625rem]"
+      className="coffee-hero-image relative mx-auto flex aspect-square w-full max-w-[19.5625rem] items-center justify-center sm:max-w-[21.5625rem] lg:max-w-[23.5625rem]"
       aria-hidden
     >
       <div className="coffee-hero-image-glow coffee-hero-image-glow--outer pointer-events-none absolute -inset-[12%]" />

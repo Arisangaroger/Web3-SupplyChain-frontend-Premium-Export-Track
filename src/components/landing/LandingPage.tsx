@@ -38,7 +38,7 @@ export function LandingPage() {
         <div className="pointer-events-none absolute -right-24 top-0 h-96 w-96 rounded-full bg-amber/10 blur-3xl" />
         <div className="pointer-events-none absolute -left-16 bottom-0 h-72 w-72 rounded-full bg-forest-light/20 blur-3xl" />
 
-        <div className="relative mx-auto grid max-w-7xl gap-[50px] px-4 py-[74px] lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-8 lg:py-[106px]">
+        <div className="relative mx-auto grid max-w-7xl gap-[65px] px-4 py-[89px] lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-8 lg:py-[121px]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber/90">
               Rwanda · Specialty Coffee
