@@ -1,0 +1,272 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  --forest: #1b4332;
+  --forest-light: #2d6a4f;
+  --surface-canvas: #f0ece4;
+  --surface-inset: #f9f7f4;
+  --surface-chrome: #f0ebe3;
+  --cream: var(--surface-canvas);
+  --amber: #d4a373;
+  --amber-muted: #f5ebe0;
+  --amber-border: #e8d4bc;
+  --amber-foreground: #523819;
+}
+
+@layer base {
+  body {
+    @apply bg-canvas font-sans text-base text-slate-900 antialiased;
+  }
+
+  h1 {
+    font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+
+  h2 {
+    font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+
+  label {
+    @apply font-sans text-sm;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  .font-data {
+    @apply font-mono tabular-nums tracking-tight;
+  }
+
+  .font-data-hero {
+    @apply type-metric-xl text-forest;
+  }
+
+  .font-data-code {
+    @apply font-data text-sm;
+  }
+
+  .font-data-inline {
+    @apply font-data text-sm;
+  }
+
+  /** 3-level typographic scale for dashboards */
+  .type-label {
+    @apply text-xs leading-snug text-slate-500;
+  }
+
+  .type-body {
+    @apply text-sm leading-relaxed text-slate-700;
+  }
+
+  .type-metric {
+    @apply font-data text-5xl font-bold tabular-nums leading-none tracking-tight text-forest sm:text-6xl;
+  }
+
+  .type-metric-xl {
+    @apply font-data text-6xl font-bold tabular-nums leading-none tracking-tight text-forest sm:text-[4.5rem];
+  }
+
+  .type-hero-display {
+    @apply font-display text-2xl font-bold leading-tight tracking-tight text-forest sm:text-3xl;
+  }
+
+  .dashboard-prose {
+    @apply type-body space-y-4;
+  }
+
+  .eyebrow {
+    @apply text-[11px] font-medium uppercase tracking-[0.14em] text-slate-500;
+  }
+
+  .lead {
+    @apply text-base leading-relaxed text-slate-600;
+  }
+
+  .text-display-lg {
+    @apply font-display text-4xl lg:text-5xl;
+  }
+
+  .text-display-md {
+    @apply font-display text-2xl;
+  }
+
+  .text-display-sm {
+    @apply font-display text-lg;
+  }
+
+  .surface-inset {
+    @apply rounded-lg border border-forest/[0.08] bg-inset;
+  }
+
+  .surface-card {
+    @apply rounded-xl border border-forest/10 bg-white shadow-[0_1px_2px_rgba(27,67,50,0.05),0_6px_16px_rgba(27,67,50,0.06)];
+  }
+
+  .surface-card-primary {
+    @apply rounded-xl border-[1.5px] border-forest bg-white p-6 shadow-[0_2px_4px_rgba(27,67,50,0.08),0_8px_24px_rgba(27,67,50,0.08)] sm:p-8;
+  }
+
+  .surface-card-tertiary {
+    @apply rounded-xl border border-forest/[0.06] bg-inset/30 p-3 shadow-none sm:p-4;
+  }
+
+  .surface-placeholder {
+    @apply rounded-2xl border border-dashed border-forest/20 bg-inset/60;
+  }
+
+  /** Forest = primary actions · Amber = status highlights & attention */
+  .status-highlight {
+    @apply border-amber-200 bg-amber-100 text-amber-800;
+  }
+
+  .status-highlight-subtle {
+    @apply border border-amber-200/70 bg-amber/15 text-amber-800;
+  }
+
+  .status-highlight-strong {
+    @apply border-amber-400 bg-amber text-white;
+  }
+
+  .active-step-dot {
+    @apply bg-amber shadow-sm ring-4 ring-amber/25;
+  }
+
+  .active-step-label {
+    @apply font-semibold text-amber-800;
+  }
+
+  .locked-badge {
+    @apply inline-flex items-center gap-1 rounded-full border border-amber-300 bg-amber-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-900;
+  }
+
+  .blockchain-accent {
+    @apply border-l-[3px] border-l-amber bg-amber-50/70;
+  }
+
+  .nav-active-pill {
+    @apply border-amber-300/70 bg-amber-100 text-amber-900 shadow-sm ring-1 ring-amber/20;
+  }
+
+  .nav-active-sidebar {
+    @apply bg-amber-50/90 text-amber-950 ring-1 ring-amber/15;
+  }
+
+  .grade-highlight {
+    @apply border-amber-300 bg-amber-100 text-amber-900 ring-amber/20;
+  }
+
+  .grade-highlight-soft {
+    @apply border-amber-200 bg-amber-50 text-amber-800 ring-amber/15;
+  }
+
+  /* Landing hero — coffee image glow & wavy blob mask */
+  @keyframes coffee-hero-image-glow {
+    0%,
+    100% {
+      opacity: 0.45;
+      transform: scale(0.96);
+    }
+    50% {
+      opacity: 0.85;
+      transform: scale(1.04);
+    }
+  }
+
+  @keyframes coffee-hero-blob-morph {
+    0%,
+    100% {
+      border-radius: 58% 42% 52% 48% / 50% 45% 55% 50%;
+    }
+    33% {
+      border-radius: 48% 52% 45% 55% / 55% 48% 52% 45%;
+    }
+    66% {
+      border-radius: 55% 45% 58% 42% / 45% 55% 48% 52%;
+    }
+  }
+
+  @keyframes coffee-hero-image-float {
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-6px) scale(1.02);
+    }
+  }
+
+  .coffee-hero-image-glow {
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(212, 163, 115, 0.45) 0%,
+      rgba(45, 106, 79, 0.2) 42%,
+      transparent 72%
+    );
+    filter: blur(22px);
+    animation: coffee-hero-image-glow 7s ease-in-out infinite;
+  }
+
+  .coffee-hero-image-glow--outer {
+    opacity: 0.55;
+    background: radial-gradient(
+      circle,
+      rgba(212, 163, 115, 0.25) 0%,
+      rgba(27, 67, 50, 0.12) 50%,
+      transparent 75%
+    );
+    filter: blur(32px);
+    animation: coffee-hero-image-glow 9s ease-in-out infinite reverse;
+  }
+
+  .coffee-hero-image-blob {
+    border-radius: 58% 42% 52% 48% / 50% 45% 55% 50%;
+    box-shadow:
+      0 0 40px rgba(212, 163, 115, 0.35),
+      0 0 80px rgba(45, 106, 79, 0.2),
+      0 0 120px rgba(212, 163, 115, 0.12);
+    animation: coffee-hero-blob-morph 16s ease-in-out infinite;
+  }
+
+  .coffee-hero-image-photo {
+    transform: scale(1.08);
+    animation: coffee-hero-image-float 8s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .coffee-hero-image-glow,
+    .coffee-hero-image-glow--outer,
+    .coffee-hero-image-blob,
+    .coffee-hero-image-photo {
+      animation: none;
+    }
+  }
+}
+
+@keyframes leaf-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.leaf-pulse {
+  animation: leaf-pulse 1.5s ease-in-out infinite;
+}
