@@ -15,6 +15,9 @@ export function resolveHealthUrl(): string {
 
 export function getApiErrorMessage(error: unknown, fallback = "Request failed"): string {
   if (isAxiosError(error)) {
+    if (error.code === "ECONNABORTED" || error.message.includes("timeout")) {
+      return "The server did not respond in time. If you use Render free tier, open the backend /health URL in your browser first to wake it, then try again. Also confirm BACKEND_URL is set on Vercel.";
+    }
     const data = error.response?.data as { message?: string | string[] } | undefined;
     if (Array.isArray(data?.message)) {
       return data.message.join(", ");
