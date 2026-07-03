@@ -7,7 +7,9 @@ import { SurfaceInset } from "@/components/ui/SurfaceInset";
 import { LifecycleTimeline } from "@/components/lifecycle/LifecycleTimeline";
 import { QrScanner } from "@/components/qr/QrScanner";
 import { QrCodeDisplay } from "@/components/qr/QrCodeDisplay";
-import { DataValue } from "@/components/ui/typography";
+import { FarmerSelect } from "@/components/washing-station/FarmerSelect";
+import { BodyText, DataValue } from "@/components/ui/typography";
+import type { FarmerSummary } from "@/services/api";
 
 interface RegisteredSack {
   trackingCode: string;
@@ -19,12 +21,15 @@ interface Props {
   trackingCode: string;
   sackWeightKg: string;
   farmerId: string;
+  farmers: FarmerSummary[];
+  farmersLoading: boolean;
   geoLoading: boolean;
   isReady: boolean;
   registeredSack: RegisteredSack | null;
   onTrackingCodeChange: (value: string) => void;
   onSackWeightKgChange: (value: string) => void;
   onFarmerIdChange: (value: string) => void;
+  onGoToFarmersTab: () => void;
   onScan: (raw: string) => void;
   onRegister: () => void;
 }
@@ -33,12 +38,15 @@ export function SackQrPanel({
   trackingCode,
   sackWeightKg,
   farmerId,
+  farmers,
+  farmersLoading,
   geoLoading,
   isReady,
   registeredSack,
   onTrackingCodeChange,
   onSackWeightKgChange,
   onFarmerIdChange,
+  onGoToFarmersTab,
   onScan,
   onRegister,
 }: Props) {
@@ -59,22 +67,31 @@ export function SackQrPanel({
             onChange={(e) => onTrackingCodeChange(e.target.value)}
             placeholder="WS-QR-00012345"
           />
-          <Input
-            label="Farmer ID (must match intake record)"
-            mono
-            value={farmerId}
-            onChange={(e) => onFarmerIdChange(e.target.value)}
-            placeholder="e.g. 101"
-            required
+          <FarmerSelect
+            label="Farmer (same as cherry intake)"
+            farmerId={farmerId}
+            farmers={farmers}
+            loading={farmersLoading}
+            onChange={onFarmerIdChange}
+            onGoToFarmersTab={onGoToFarmersTab}
           />
           <Input
-            label="Sack weight after processing (kg)"
+            label="Processed green coffee weight (kg)"
             mono
             value={sackWeightKg}
             onChange={(e) => onSackWeightKgChange(e.target.value)}
             placeholder="e.g. 60"
+            required
           />
-          <Button onClick={onRegister} disabled={geoLoading || !isReady}>
+          <BodyText muted className="text-xs leading-relaxed">
+            Weight of this sack <strong>after</strong> washing, pulping, and drying — not the fresh
+            cherry weight from intake. Cherry often loses roughly half its weight during processing
+            (e.g. 120 kg cherries → ~60 kg green coffee in the sack).
+          </BodyText>
+          <Button
+            onClick={onRegister}
+            disabled={geoLoading || !isReady || !farmerId || !sackWeightKg.trim()}
+          >
             {geoLoading ? "Capturing GPS..." : "Register tracking QR + GPS"}
           </Button>
           {registeredSack ? (

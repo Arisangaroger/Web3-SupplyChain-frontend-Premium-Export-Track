@@ -19,6 +19,7 @@ import { useGeolocation } from "@/hooks/useGeolocation";
 import { useOfflineSync } from "@/hooks/useOfflineSync";
 import { useWashingStationId } from "@/hooks/useWashingStationId";
 import { parseTrackingCode } from "@/lib/lifecycle";
+import { getFarmerDisplayLabel } from "@/lib/farmers";
 import type { OperatorRole } from "@/lib/roles";
 import {
   getApiErrorMessage,
@@ -116,6 +117,7 @@ export function WashingStationDashboard() {
 
   const heroConfig = HERO_BY_SECTION[activeSection];
   const heroValue = heroConfig.getValue(heroContext);
+  const selectedFarmerLabel = getFarmerDisplayLabel(farmers, farmerId);
 
   const clearFeedback = () => {
     setMessage(null);
@@ -187,7 +189,7 @@ export function WashingStationDashboard() {
       try {
         await submitDelivery(payload);
         setMessage(
-          `Cherry intake logged for farmer ${farmerId}. Process coffee, then scan the pre-printed sack QR.`,
+          `Cherry intake logged for ${selectedFarmerLabel}. Process coffee, then scan the pre-printed sack QR.`,
         );
         setActiveSection("sack-qr");
       } catch (submitError) {
@@ -245,7 +247,7 @@ export function WashingStationDashboard() {
         label={heroConfig.label}
         value={heroValue}
         unit={heroConfig.unit}
-        sublabel={`Farmer ${farmerId.trim() ? `#${farmerId}` : "—"} · ${targetPeriod} · ${washingStationId || "Set station ID"}`}
+        sublabel={`${selectedFarmerLabel} · ${targetPeriod} · ${washingStationId || "Set station ID"}`}
       />
 
       <BodyText muted className="mb-4">
@@ -303,12 +305,15 @@ export function WashingStationDashboard() {
           trackingCode={trackingCode}
           sackWeightKg={sackWeightKg}
           farmerId={farmerId}
+          farmers={farmers}
+          farmersLoading={farmersLoading}
           geoLoading={geoLoading}
           isReady={isReady}
           registeredSack={registeredSack}
           onTrackingCodeChange={setTrackingCode}
           onSackWeightKgChange={setSackWeightKg}
           onFarmerIdChange={setFarmerId}
+          onGoToFarmersTab={() => setActiveSection("farmers")}
           onScan={onScanTrackingQr}
           onRegister={onRegisterTrackingQr}
         />
@@ -323,6 +328,7 @@ export function WashingStationDashboard() {
           pendingCount={pendingCount}
           failedCount={failedCount}
           failedRecords={failedRecords}
+          farmers={farmers}
           syncing={syncing}
           onSyncPending={syncPending}
           onRetryFailed={retryFailed}

@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { SurfaceInset } from "@/components/ui/SurfaceInset";
 import { BodyText, DataValue } from "@/components/ui/typography";
+import { getFarmerDisplayLabel } from "@/lib/farmers";
 import { getFailedDeliveries } from "@/services/offlineDb";
+import type { FarmerSummary } from "@/services/api";
 
 type FailedOfflineRecord = Awaited<ReturnType<typeof getFailedDeliveries>>[number];
 
@@ -12,6 +14,7 @@ interface Props {
   pendingCount: number;
   failedCount: number;
   failedRecords: FailedOfflineRecord[];
+  farmers: FarmerSummary[];
   syncing: boolean;
   onSyncPending: () => void;
   onRetryFailed: () => void;
@@ -22,6 +25,7 @@ export function OfflineSyncPanel({
   pendingCount,
   failedCount,
   failedRecords,
+  farmers,
   syncing,
   onSyncPending,
   onRetryFailed,
@@ -68,7 +72,7 @@ export function OfflineSyncPanel({
               key={record.id}
               className="rounded border border-red-100 bg-red-50 p-2 font-data text-xs"
             >
-              Farmer <DataValue>{record.farmerId}</DataValue> ·{" "}
+              {getFarmerDisplayLabel(farmers, record.farmerId)} ·{" "}
               <DataValue>{record.weightKg} kg</DataValue> —{" "}
               <span className="font-sans">{record.errorMessage ?? "Sync failed"}</span>
             </li>
