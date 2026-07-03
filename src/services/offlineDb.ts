@@ -59,6 +59,10 @@ export async function getFailedDeliveries() {
   return offlineDb.pendingDeliveries.where("syncStatus").equals("failed").toArray();
 }
 
+export async function clearFailedDeliveries() {
+  await offlineDb.pendingDeliveries.where("syncStatus").equals("failed").delete();
+}
+
 export async function markDeliveryPending(id: number) {
   await offlineDb.pendingDeliveries.update(id, {
     syncStatus: "pending",

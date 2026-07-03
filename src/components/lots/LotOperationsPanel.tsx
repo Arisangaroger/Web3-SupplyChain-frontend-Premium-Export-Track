@@ -40,7 +40,7 @@ export function LotOperationsPanel({
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const [batchFarmerId, setBatchFarmerId] = useState("101");
+  const [batchFarmerId, setBatchFarmerId] = useState("");
   const [batchPeriod, setBatchPeriod] = useState(new Date().toISOString().slice(0, 7));
   const [batchResult, setBatchResult] = useState<{
     cooperativeBatchId: number;
@@ -149,12 +149,14 @@ export function LotOperationsPanel({
                 mono
                 value={batchFarmerId}
                 onChange={(e) => setBatchFarmerId(e.target.value)}
+                placeholder="e.g. 101"
               />
               <Input
                 label="Target period (YYYY-MM)"
                 mono
                 value={batchPeriod}
                 onChange={(e) => setBatchPeriod(e.target.value)}
+                placeholder="2026-07"
               />
               <Input
                 label="Washing station ID"
@@ -162,6 +164,7 @@ export function LotOperationsPanel({
                 value={washingStationId}
                 onChange={(e) => onStationIdChange?.(e.target.value)}
                 readOnly={!stationEditable}
+                placeholder="WS-001"
               />
             </div>
             <Button className="mt-3" onClick={onCreateBatch} disabled={loading}>

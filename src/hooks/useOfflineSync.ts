@@ -1,16 +1,17 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { submitDelivery } from "@/services/api";
 import {
   countFailedDeliveries,
   countPendingDeliveries,
+  clearFailedDeliveries,
   getFailedDeliveries,
   getPendingDeliveries,
   markDeliveryFailed,
   markDeliveryPending,
   markDeliverySynced,
 } from "@/services/offlineDb";
+import { getApiErrorMessage, submitDelivery } from "@/services/api";
 
 export function useOfflineSync() {
   const [pendingCount, setPendingCount] = useState(0);
@@ -44,7 +45,7 @@ export function useOfflineSync() {
           await submitDelivery(payload);
           await markDeliverySynced(record.id);
         } catch (error) {
-          const message = error instanceof Error ? error.message : "Sync failed";
+          const message = getApiErrorMessage(error, "Sync failed");
           await markDeliveryFailed(record.id, message);
         }
       }
@@ -64,6 +65,11 @@ export function useOfflineSync() {
     await syncPending();
   }, [failedRecords, refreshCount, syncPending]);
 
+  const clearFailed = useCallback(async () => {
+    await clearFailedDeliveries();
+    await refreshCount();
+  }, [refreshCount]);
+
   useEffect(() => {
     refreshCount();
     const onOnline = () => syncPending();
@@ -78,6 +84,7 @@ export function useOfflineSync() {
     syncing,
     syncPending,
     retryFailed,
+    clearFailed,
     refreshCount,
   };
 }

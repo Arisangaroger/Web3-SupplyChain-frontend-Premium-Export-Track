@@ -17,7 +17,7 @@ import { PublicPageLayout } from "@/components/layout/PublicPageLayout";
 import { getApiErrorMessage, getFarmerCreditScoreHistory, verifyFarmerForLender } from "@/services/api";
 
 export default function LenderPortalPage() {
-  const [farmerId, setFarmerId] = useState("101");
+  const [farmerId, setFarmerId] = useState("");
   const [data, setData] = useState<Awaited<ReturnType<typeof verifyFarmerForLender>> | null>(null);
   const [history, setHistory] = useState<Awaited<
     ReturnType<typeof getFarmerCreditScoreHistory>
@@ -60,8 +60,9 @@ export default function LenderPortalPage() {
             mono
             value={farmerId}
             onChange={(e) => setFarmerId(e.target.value)}
+            placeholder="e.g. 101"
           />
-          <Button onClick={onAudit} disabled={loading}>
+          <Button onClick={onAudit} disabled={loading || !farmerId.trim()}>
             {loading ? "Auditing..." : "Run Audit & Score"}
           </Button>
         </div>

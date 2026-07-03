@@ -42,6 +42,7 @@ export function CherryIntakePanel({
             mono
             value={farmerId}
             onChange={(e) => onFarmerIdChange(e.target.value)}
+            placeholder="e.g. 101"
             required
           />
           <Input
@@ -49,6 +50,7 @@ export function CherryIntakePanel({
             mono
             value={weightKg}
             onChange={(e) => onWeightKgChange(e.target.value)}
+            placeholder="e.g. 120"
             required
           />
           <Input
@@ -56,6 +58,7 @@ export function CherryIntakePanel({
             mono
             value={basePrice}
             onChange={(e) => onBasePriceChange(e.target.value)}
+            placeholder="e.g. 0.50"
             required
           />
           <Input
@@ -63,6 +66,7 @@ export function CherryIntakePanel({
             mono
             value={regionCode}
             onChange={(e) => onRegionCodeChange(e.target.value)}
+            placeholder="e.g. RW-South"
             required
           />
           <Button type="submit" disabled={geoLoading || !isReady}>

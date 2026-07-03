@@ -64,6 +64,7 @@ export function SackQrPanel({
             mono
             value={farmerId}
             onChange={(e) => onFarmerIdChange(e.target.value)}
+            placeholder="e.g. 101"
             required
           />
           <Input
@@ -71,6 +72,7 @@ export function SackQrPanel({
             mono
             value={sackWeightKg}
             onChange={(e) => onSackWeightKgChange(e.target.value)}
+            placeholder="e.g. 60"
           />
           <Button onClick={onRegister} disabled={geoLoading || !isReady}>
             {geoLoading ? "Capturing GPS..." : "Register tracking QR + GPS"}

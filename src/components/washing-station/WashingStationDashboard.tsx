@@ -66,15 +66,15 @@ export function WashingStationDashboard() {
   const { stationId, setStationId, editable: stationEditable, isReady } =
     useWashingStationId(operator);
   const { capture, toCoordinateString, loading: geoLoading } = useGeolocation();
-  const { pendingCount, failedCount, failedRecords, syncing, syncPending, retryFailed, refreshCount } =
+  const { pendingCount, failedCount, failedRecords, syncing, syncPending, retryFailed, clearFailed, refreshCount } =
     useOfflineSync();
 
   const [activeSection, setActiveSection] = useState<WashingStationSection>("intake");
-  const [farmerId, setFarmerId] = useState("101");
-  const [weightKg, setWeightKg] = useState("120");
-  const [sackWeightKg, setSackWeightKg] = useState("60");
-  const [basePrice, setBasePrice] = useState("0.50");
-  const [regionCode, setRegionCode] = useState("RW-South");
+  const [farmerId, setFarmerId] = useState("");
+  const [weightKg, setWeightKg] = useState("");
+  const [sackWeightKg, setSackWeightKg] = useState("");
+  const [basePrice, setBasePrice] = useState("");
+  const [regionCode, setRegionCode] = useState("");
   const [trackingCode, setTrackingCode] = useState("");
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -118,6 +118,11 @@ export function WashingStationDashboard() {
 
     if (!isReady) {
       setError("Set a washing station ID before logging deliveries.");
+      return;
+    }
+
+    if (!farmerId.trim() || !weightKg.trim() || !basePrice.trim() || !regionCode.trim()) {
+      setError("Fill in all cherry intake fields.");
       return;
     }
 
@@ -196,7 +201,7 @@ export function WashingStationDashboard() {
         label={heroConfig.label}
         value={heroValue}
         unit={heroConfig.unit}
-        sublabel={`Farmer #${farmerId} · ${targetPeriod} · ${washingStationId || "Set station ID"}`}
+        sublabel={`Farmer ${farmerId.trim() ? `#${farmerId}` : "—"} · ${targetPeriod} · ${washingStationId || "Set station ID"}`}
       />
 
       <BodyText muted className="mb-4">
@@ -264,6 +269,7 @@ export function WashingStationDashboard() {
           syncing={syncing}
           onSyncPending={syncPending}
           onRetryFailed={retryFailed}
+          onClearFailed={clearFailed}
         />
       ) : null}
 

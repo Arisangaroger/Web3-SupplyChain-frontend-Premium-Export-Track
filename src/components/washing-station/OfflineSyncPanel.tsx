@@ -15,6 +15,7 @@ interface Props {
   syncing: boolean;
   onSyncPending: () => void;
   onRetryFailed: () => void;
+  onClearFailed: () => void;
 }
 
 export function OfflineSyncPanel({
@@ -24,6 +25,7 @@ export function OfflineSyncPanel({
   syncing,
   onSyncPending,
   onRetryFailed,
+  onClearFailed,
 }: Props) {
   return (
     <Card title="Offline sync queue" weight="tertiary">
@@ -50,6 +52,11 @@ export function OfflineSyncPanel({
           {failedCount > 0 ? (
             <Button variant="ghost" onClick={onRetryFailed} disabled={syncing}>
               Retry failed deliveries
+            </Button>
+          ) : null}
+          {failedCount > 0 ? (
+            <Button variant="ghost" onClick={onClearFailed} disabled={syncing}>
+              Clear failed list
             </Button>
           ) : null}
         </div>
