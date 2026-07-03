@@ -68,7 +68,7 @@ export function RollupJobPanel({ washingStationId, defaultTargetPeriod }: Props)
             if (status.state === "completed" && status.returnvalue?.txHash) {
               setMessage(
                 <>
-                  Anchor confirmed on-chain. Tx:{" "}
+                  Saved to the ledger. Tx:{" "}
                   <DataValue size="xs" className="break-all">
                     {status.returnvalue.txHash}
                   </DataValue>
@@ -76,7 +76,7 @@ export function RollupJobPanel({ washingStationId, defaultTargetPeriod }: Props)
               );
               setIsError(false);
             } else if (status.state === "failed") {
-              setMessage(status.failedReason ?? "Blockchain anchor job failed");
+              setMessage(status.failedReason ?? "Save to ledger failed");
               setIsError(true);
             }
           }
@@ -105,14 +105,14 @@ export function RollupJobPanel({ washingStationId, defaultTargetPeriod }: Props)
       setRollupResult(result);
 
       if (result.queueJobId) {
-        setMessage("Rollup computed — blockchain job queued. Tracking status…");
+        setMessage("Rollup done — saving to ledger. Checking status…");
         setIsError(false);
         pollJob(result.queueJobId);
       } else if (skipAnchor) {
-        setMessage("Rollup completed (anchor skipped). Merkle root stored in database.");
+        setMessage("Rollup done (ledger save skipped). Data hash stored in database.");
         setIsError(false);
       } else {
-        setMessage("Rollup completed. No anchor job was queued.");
+        setMessage("Rollup done. No ledger save was queued.");
         setIsError(false);
       }
     } catch (err) {
@@ -126,7 +126,7 @@ export function RollupJobPanel({ washingStationId, defaultTargetPeriod }: Props)
   return (
     <Card title="Monthly rollup" weight="secondary">
       {loading ? (
-        <LoadingStatePanel label="Computing Merkle root…" />
+        <LoadingStatePanel label="Computing monthly summary…" />
       ) : rollupResult?.farmerCount != null ? (
         <DashboardHeroStrip
           label="Farmers in rollup"
@@ -140,7 +140,7 @@ export function RollupJobPanel({ washingStationId, defaultTargetPeriod }: Props)
             compact
             icon="chain"
             title="No rollup run yet"
-            description="Pick a month and run the rollup to save farmer data on-chain."
+            description="Pick a month and run the rollup to save farmer data to the ledger."
           />
         </div>
       )}
@@ -159,7 +159,7 @@ export function RollupJobPanel({ washingStationId, defaultTargetPeriod }: Props)
             onChange={(e) => setSkipAnchor(e.target.checked)}
             className="rounded border-slate-300"
           />
-          Skip on-chain anchor (compute Merkle root only)
+          Skip ledger save (compute data hash only)
         </label>
         <Button onClick={onRunRollup} disabled={loading || !targetPeriod || !washingStationId.trim()}>
           {loading ? "Running rollup…" : "Run monthly rollup"}
@@ -181,7 +181,7 @@ export function RollupJobPanel({ washingStationId, defaultTargetPeriod }: Props)
             </p>
             {rollupResult.merkleRoot ? (
               <p className="mt-1 break-all font-data text-xs">
-                Root: {rollupResult.merkleRoot}
+                Data hash: {rollupResult.merkleRoot}
               </p>
             ) : null}
             {rollupResult.queueJobId ? (

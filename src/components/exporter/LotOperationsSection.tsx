@@ -19,9 +19,9 @@ export function LotOperationsSection({
 }: Props) {
   if (!isReady) {
     return (
-      <Card title="Washing station scope" weight="tertiary">
+      <Card title="Your station" weight="tertiary">
         <Input
-          label="Washing station ID (required for batch operations)"
+          label="Washing station ID (needed for lot work)"
           mono
           value={stationId}
           onChange={(e) => onStationIdChange(e.target.value)}

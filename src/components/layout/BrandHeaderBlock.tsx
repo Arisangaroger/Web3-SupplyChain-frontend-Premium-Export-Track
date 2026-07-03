@@ -15,7 +15,7 @@ export function BrandHeaderBlock({ title, eyebrow = "Premium Export Track", subt
       </div>
       <div className="min-w-0">
         <Eyebrow className="text-slate-500">{eyebrow}</Eyebrow>
-        <h1 className="truncate text-display-sm text-forest">{title}</h1>
+        <h1 className="truncate font-display text-display-sm text-forest">{title}</h1>
         {subtitle ? <div className="mt-0.5 truncate text-xs text-slate-500">{subtitle}</div> : null}
       </div>
     </div>

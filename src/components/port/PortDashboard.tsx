@@ -30,11 +30,11 @@ const HERO_BY_SECTION: Record<
     getValue: (ctx) => ctx.trackingCode || "—",
   },
   "port-clearance": {
-    label: "Target lifecycle stage",
+    label: "Current step",
     getValue: () => stageNumber(),
   },
   "custody-review": {
-    label: "Custody events",
+    label: "Steps recorded",
     getValue: (ctx) => (ctx.eventCount !== null ? String(ctx.eventCount) : "—"),
   },
 };
@@ -127,7 +127,7 @@ export function PortDashboard() {
     activeSection === "custody-review"
       ? timeline?.locked
         ? "Shipment locked — ready for export"
-        : "Review full supply chain record"
+        : "Review full shipment path"
       : STAGE_LABELS[TARGET_STAGE];
 
   return (

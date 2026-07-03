@@ -9,7 +9,7 @@ export const DASHBOARD_NAV_ITEMS = [
 
 export const ADMIN_NAV_ITEMS = [
   ...DASHBOARD_NAV_ITEMS,
-  { path: "/dashboards/admin/register", label: "Register operator" },
+  { path: "/dashboards/admin/register", label: "Add user" },
 ] as const;
 
 export function getOperatorDashboardNav(role: string) {

@@ -133,7 +133,7 @@ export function FarmersPanel({
               required
             />
             <Input
-              label="KYC reference (optional)"
+              label="ID reference (optional)"
               mono
               value={kycReference}
               onChange={(e) => setKycReference(e.target.value)}
@@ -170,7 +170,7 @@ export function FarmersPanel({
                     <tr className="border-b border-forest/10 text-xs uppercase tracking-wide text-slate-500">
                       <th className="py-2 pr-4 font-medium">ID</th>
                       <th className="py-2 pr-4 font-medium">Name</th>
-                      <th className="py-2 pr-4 font-medium">KYC</th>
+                      <th className="py-2 pr-4 font-medium">ID ref</th>
                       <th className="py-2 pr-4 font-medium">Registered</th>
                       <th className="py-2 pr-4 font-medium">Deliveries</th>
                       <th className="py-2 font-medium">Total kg</th>

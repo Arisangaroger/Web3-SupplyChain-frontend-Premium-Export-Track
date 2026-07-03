@@ -40,7 +40,7 @@ export function AccessDeniedScreen({ reason, operatorRole }: Props) {
               href="/login"
               className="text-sm font-medium text-forest transition hover:underline"
             >
-              Sign in as different operator
+              Sign in with another account
             </Link>
           ) : null}
         </div>

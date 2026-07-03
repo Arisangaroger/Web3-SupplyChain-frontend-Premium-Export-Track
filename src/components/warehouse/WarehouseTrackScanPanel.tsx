@@ -37,16 +37,12 @@ export function WarehouseTrackScanPanel({
 }: Props) {
   return (
     <div className="grid gap-6 lg:grid-cols-2">
-      <QrScanner
-        onScan={onScan}
-        title="Scan internal TRACK QR at warehouse intake"
-        weight="secondary"
-      />
+      <QrScanner onScan={onScan} title="Scan tracking code" weight="secondary" />
 
-      <Card step="1" title="Load supply chain timeline" weight="secondary">
+      <Card step="1" title="Load timeline" weight="secondary">
         <div className="space-y-3">
           <Input
-            label="Tracking / lot code"
+            label="Tracking code"
             mono
             value={trackingCode}
             onChange={(e) => onTrackingCodeChange(e.target.value)}
@@ -60,13 +56,13 @@ export function WarehouseTrackScanPanel({
 
       {loading ? (
         <div className="lg:col-span-2">
-          <LoadingStatePanel label="Loading supply chain timeline…" />
+          <LoadingStatePanel label="Loading timeline…" />
         </div>
       ) : timeline ? (
-        <Card title="Supply chain progress" weight="primary" badge="Verification result" className="lg:col-span-2">
+        <Card title="Progress" weight="primary" badge="Result" className="lg:col-span-2">
           {timeline.passportSlug ? (
             <BodyText className="mb-3 font-medium text-forest">
-              Buyer passport issued:{" "}
+              Buyer passport:{" "}
               <Link
                 href={`/verify/passport/${encodeURIComponent(timeline.passportSlug)}`}
                 className="font-data font-semibold text-amber-800 hover:underline"
@@ -82,12 +78,12 @@ export function WarehouseTrackScanPanel({
           />
         </Card>
       ) : (
-        <Card title="Supply chain progress" weight="tertiary" className="lg:col-span-2">
+        <Card title="Progress" weight="tertiary" className="lg:col-span-2">
           <EmptyStatePanel
             compact
             icon="chain"
             title="No timeline loaded"
-            description="Scan a TRACK QR code, enter the tracking ID, and load the timeline to see custody stages before recording warehouse intake."
+            description="Scan the code and load the timeline before marking goods as stored."
           />
         </Card>
       )}

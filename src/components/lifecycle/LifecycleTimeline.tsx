@@ -75,7 +75,7 @@ export function LifecycleTimeline({
   );
 
   return (
-    <ol className="relative m-0 list-none p-0" aria-label="Supply chain lifecycle">
+    <ol className="relative m-0 list-none p-0" aria-label="Shipment steps">
       {stages.map((stage, index) => {
         const isLast = index === stages.length - 1;
         const isCurrent = stage === currentStage;

@@ -74,8 +74,8 @@ export default function BuyerLotVerifyPage({ params }: { params: { lotCode: stri
 
   return (
     <PublicPageLayout
-      title="Export Lot Verification"
-      subtitle="Buyer & auditor lot traceability check"
+      title="Export lot check"
+      subtitle="Look up a lot code and see farmer records"
       maxWidth="6xl"
     >
       <VerifyLookupPanel
@@ -89,8 +89,8 @@ export default function BuyerLotVerifyPage({ params }: { params: { lotCode: stri
         verifyLabel="Verify lot"
         title="Find an export lot"
         titleAfterResult="Look up another lot"
-        description="Scan the lot QR code or enter the export lot code to verify farmer allocations."
-        descriptionAfterResult="Scan or enter a different lot code to verify another export batch."
+        description="Scan the lot QR or enter the lot code to see farmer shares in the batch."
+        descriptionAfterResult="Scan or enter another lot code to check a different batch."
         onInputChange={setInput}
         onVerify={() => load(input)}
         onScan={handleScan}
@@ -100,7 +100,7 @@ export default function BuyerLotVerifyPage({ params }: { params: { lotCode: stri
         <VerificationEmptyState
           icon="leaf"
           title="No lot loaded yet"
-          description="Enter an export lot code above to see verification status and traceability for each farmer allocation in the batch."
+          description="Enter a lot code above to see check status and farmer shares in the batch."
         />
       ) : null}
 
@@ -131,15 +131,15 @@ export default function BuyerLotVerifyPage({ params }: { params: { lotCode: stri
               <EmptyStatePanel
                 compact
                 icon="package"
-                title="No allocations yet"
-                description="This lot exists but has no farmer allocations yet. Check back after the exporter splits cooperative batches into this lot."
+                title="No farmer shares yet"
+                description="This lot exists but has no farmer shares yet. Check back after the exporter adds farmers to this lot."
               />
             </Card>
           ) : (
             <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
               <div className="space-y-6">
                 {data.mode === "SPLIT_LOT" && data.allocations?.length ? (
-                  <Card title="Verified allocations" weight="primary" badge="Verification result">
+                  <Card title="Farmer shares" weight="primary" badge="Result">
                     <div className="space-y-3">
                       {data.allocations.map(
                         (alloc: {
@@ -170,12 +170,12 @@ export default function BuyerLotVerifyPage({ params }: { params: { lotCode: stri
                                 />
                               ) : (
                                 <span className="text-xs text-amber-700">
-                                  Pending on-chain proof
+                                  Waiting for ledger proof
                                 </span>
                               )}
                             </div>
                             <p className="mt-1 text-sm text-slate-600">
-                              <DataValue>{alloc.allocatedWeightKg} kg</DataValue> allocated
+                              <DataValue>{alloc.allocatedWeightKg} kg</DataValue> in this lot
                             </p>
                             {alloc.verification?.message ? (
                               <p className="mt-2 text-xs text-slate-500">
@@ -190,7 +190,7 @@ export default function BuyerLotVerifyPage({ params }: { params: { lotCode: stri
                 ) : null}
 
                 {data.mode === "LEGACY_LOT" && data.month ? (
-                  <Card title="Monthly compliance record" weight="primary" badge="Verification result">
+                  <Card title="Latest monthly record" weight="primary" badge="Result">
                     <div className="space-y-4">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <p className="font-medium">
@@ -232,7 +232,7 @@ export default function BuyerLotVerifyPage({ params }: { params: { lotCode: stri
                         </dd>
                       </div>
                       <div className="surface-inset p-3">
-                        <dt className="eyebrow text-slate-400">Total allocated</dt>
+                        <dt className="eyebrow text-slate-400">Total weight</dt>
                         <dd className="mt-1 font-data text-2xl font-bold text-forest">
                           {(data.allocations ?? []).reduce(
                             (sum: number, a: { allocatedWeightKg: number }) =>
@@ -244,8 +244,8 @@ export default function BuyerLotVerifyPage({ params }: { params: { lotCode: stri
                       </div>
                     </dl>
                     <p className="mt-4 text-sm text-slate-600">
-                      Each allocation links a farmer&apos;s verified cooperative batch to this export
-                      lot. Failed verifications require exporter review before acceptance.
+                      Each share links a farmer&apos;s monthly batch to this export lot. Failed
+                      checks need exporter review before you accept the shipment.
                     </p>
                   </Card>
                 ) : null}

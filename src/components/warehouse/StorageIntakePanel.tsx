@@ -22,21 +22,21 @@ export function StorageIntakePanel({
   onRecordStage,
 }: Props) {
   return (
-    <Card step="2" title="Confirm warehouse stage & GPS" weight="primary" badge="Main action">
+    <Card step="2" title="Mark as stored + GPS" weight="primary" badge="Main step">
       <SurfaceInset className="space-y-3 p-4">
         <Input
-          label="Tracking / lot code"
+          label="Tracking code"
           mono
           value={trackingCode}
           onChange={(e) => onTrackingCodeChange(e.target.value)}
           placeholder="WS-QR-00012345"
         />
         <TypeLabel>
-          Operator: {operatorRole ?? "—"} → records stage{" "}
-          <DataValue className="font-semibold">AT_WAREHOUSE</DataValue>
+          User: {operatorRole ?? "—"} → records{" "}
+          <DataValue className="font-semibold">warehouse step</DataValue>
         </TypeLabel>
         <Button onClick={onRecordStage} disabled={geoLoading || !trackingCode.trim()}>
-          {geoLoading ? "Capturing GPS…" : "Record stage + location"}
+          {geoLoading ? "Getting GPS…" : "Record step + GPS"}
         </Button>
       </SurfaceInset>
     </Card>

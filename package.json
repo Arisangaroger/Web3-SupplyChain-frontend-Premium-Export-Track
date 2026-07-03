@@ -11,7 +11,6 @@
   "dependencies": {
     "axios": "^1.7.9",
     "dexie": "^4.0.10",
-    "geist": "^1.7.2",
     "html5-qrcode": "^2.3.8",
     "lucide-react": "^0.469.0",
     "next": "^14.2.21",

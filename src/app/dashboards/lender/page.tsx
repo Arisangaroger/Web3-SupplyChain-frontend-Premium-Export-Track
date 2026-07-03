@@ -9,7 +9,7 @@ import { SurfaceInset } from "@/components/ui/SurfaceInset";
 import { CreditScorePanel } from "@/components/credit/CreditScorePanel";
 import { CreditScoreHistoryTable } from "@/components/credit/CreditScoreHistoryTable";
 import { InsufficientHistoryPanel } from "@/components/credit/InsufficientHistoryPanel";
-import { BodyText, DashboardHeroStrip, DataValue, TypeLabel } from "@/components/ui/typography";
+import { BodyText, DataValue, TypeLabel } from "@/components/ui/typography";
 import { EmptyStatePanel } from "@/components/ui/EmptyStatePanel";
 import { FormErrorBanner } from "@/components/ui/FormFeedback";
 import { LoadingStatePanel } from "@/components/ui/LoadingStatePanel";
@@ -39,7 +39,7 @@ export default function LenderPortalPage() {
       setData(result);
       setHistory(scoreHistory);
     } catch (err) {
-      setError(getApiErrorMessage(err, "Audit failed"));
+      setError(getApiErrorMessage(err, "Check failed"));
     } finally {
       setLoading(false);
     }
@@ -49,11 +49,11 @@ export default function LenderPortalPage() {
 
   return (
     <PublicPageLayout
-      title="Lender Credit Audit Portal"
-      subtitle="Instant cryptographic farmer audit"
+      title="Lender credit check"
+      subtitle="Check a farmer's score and monthly records"
       maxWidth="6xl"
     >
-      <Card title="Instant Cryptographic Audit (Gasless)" weight="primary" badge="Start here">
+      <Card title="Check farmer credit" weight="primary" badge="Start here">
         <div className="flex flex-wrap items-end gap-3">
           <Input
             label="Farmer ID"
@@ -63,13 +63,13 @@ export default function LenderPortalPage() {
             placeholder="e.g. 101"
           />
           <Button onClick={onAudit} disabled={loading || !farmerId.trim()}>
-            {loading ? "Auditing..." : "Run Audit & Score"}
+            {loading ? "Checking..." : "Run check"}
           </Button>
         </div>
         {error ? <FormErrorBanner>{error}</FormErrorBanner> : null}
       </Card>
 
-      {loading && !data ? <LoadingStatePanel label="Running cryptographic audit…" /> : null}
+      {loading && !data ? <LoadingStatePanel label="Loading farmer data…" /> : null}
 
       {creditScore?.insufficientHistory ? (
         <InsufficientHistoryPanel
@@ -87,7 +87,7 @@ export default function LenderPortalPage() {
         <EmptyStatePanel
           icon="history"
           title="No score history yet"
-          description="This is the first computed credit score for this farmer. Run future audits to build a trend line over time."
+          description="This is the first score for this farmer. Run more checks later to see a trend."
           compact
         />
       ) : null}
@@ -95,13 +95,13 @@ export default function LenderPortalPage() {
       {!data && !loading && !error ? (
         <EmptyStatePanel
           icon="search"
-          title="No audit run yet"
-          description="Enter a farmer ID above and run the gasless cryptographic audit to see credit score, factor breakdown, and monthly compliance records."
+          title="No check run yet"
+          description="Enter a farmer ID above to see credit score and monthly records."
         />
       ) : null}
 
       {data ? (
-        <Card title="Monthly farmer records" weight="secondary">
+        <Card title="Monthly records" weight="secondary">
           <TypeLabel className="mb-3">
             Farmer ID:{" "}
             <DataValue className="font-semibold text-forest">{data.farmerId}</DataValue>
@@ -137,7 +137,7 @@ export default function LenderPortalPage() {
                 compact
                 icon="leaf"
                 title="No monthly records"
-                description="This farmer has no verified monthly compliance rows yet. Records appear after washing-station intake and Merkle rollup."
+                description="No records yet. They appear after cherry intake and monthly rollup at the washing station."
               />
             )}
           </div>

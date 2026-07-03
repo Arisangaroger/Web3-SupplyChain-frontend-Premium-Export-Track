@@ -15,12 +15,12 @@ export function BlockchainProofPanel({ txHash, anchoredAt, compact = false }: Pr
     <div className={`blockchain-accent surface-inset ring-1 ring-amber/10 ${compact ? "p-3" : "p-4"}`}>
       <div className="flex items-center gap-2">
         <Link2 className="h-4 w-4 text-amber-700" aria-hidden />
-        <BodyText className="font-medium text-amber-900">On-chain proof</BodyText>
+        <BodyText className="font-medium text-amber-900">Ledger proof</BodyText>
       </div>
       <dl className={`type-body mt-3 space-y-2 text-slate-700 ${compact ? "" : "sm:grid sm:grid-cols-2 sm:gap-4 sm:space-y-0"}`}>
         {anchoredAt ? (
           <div>
-            <dt className="eyebrow text-slate-400">Anchored</dt>
+            <dt className="eyebrow text-slate-400">Saved</dt>
             <dd className="mt-0.5">
               <DataValue size="xs">{new Date(anchoredAt).toLocaleString()}</DataValue>
             </dd>
@@ -38,7 +38,7 @@ export function BlockchainProofPanel({ txHash, anchoredAt, compact = false }: Pr
               >
                 {truncateTxHash(txHash)}
                 <ExternalLink className="h-3 w-3 shrink-0" aria-hidden />
-                <span className="sr-only">View on block explorer</span>
+                <span className="sr-only">View on ledger explorer</span>
               </a>
             </dd>
           </div>

@@ -25,7 +25,7 @@ export const WASHING_STATION_SECTIONS: {
   {
     id: "rollup",
     label: "Monthly rollup",
-    description: "Sum monthly data and save on-chain",
+    description: "Sum monthly data and save to the ledger",
   },
   {
     id: "offline",
@@ -72,7 +72,7 @@ export function WashingStationSectionNav({
           >
             <span className="flex items-center gap-2">
               <span
-                className={`text-sm font-semibold ${isActive ? "text-forest" : "text-slate-700"}`}
+                className={`font-display text-sm font-semibold ${isActive ? "text-forest" : "text-slate-700"}`}
               >
                 {section.label}
               </span>

@@ -10,8 +10,8 @@ const shellByWeight: Record<CardWeight, string> = {
 
 const titleByWeight: Record<CardWeight, string> = {
   primary: "type-hero-display",
-  secondary: "mb-4 text-display-sm text-forest",
-  tertiary: "mb-2 text-xs font-semibold uppercase tracking-wider text-slate-500",
+  secondary: "mb-4 font-display text-display-sm text-forest",
+  tertiary: "mb-2 font-display text-xs font-semibold uppercase tracking-wider text-slate-500",
 };
 
 export function Card({

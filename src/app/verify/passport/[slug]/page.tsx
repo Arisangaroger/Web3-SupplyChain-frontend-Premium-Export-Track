@@ -70,8 +70,8 @@ export default function BuyerPassportPage({ params }: { params: { slug: string }
 
   return (
     <PublicPageLayout
-      title="Buyer Compliance Passport"
-      subtitle="EUDR · Living Wage · Blockchain Verified"
+      title="Buyer passport"
+      subtitle="Farm location · Fair pay · Record check"
       maxWidth="6xl"
     >
       <VerifyLookupPanel
@@ -85,8 +85,8 @@ export default function BuyerPassportPage({ params }: { params: { slug: string }
         verifyLabel="Verify passport"
         title="Find a buyer passport"
         titleAfterResult="Look up another passport"
-        description="Scan the QR sticker on the sack or enter the passport code to see verification status."
-        descriptionAfterResult="Scan or enter a different passport code to verify another shipment."
+        description="Scan the QR on the sack or type the passport code."
+        descriptionAfterResult="Scan or type another passport code."
         onInputChange={setInput}
         onVerify={() => load(input)}
         onScan={handleScan}
@@ -96,7 +96,7 @@ export default function BuyerPassportPage({ params }: { params: { slug: string }
         <VerificationEmptyState
           icon="leaf"
           title="No passport loaded yet"
-          description="Enter a passport code above to see instant verification status, compliance history, and EUDR map links for this coffee shipment."
+          description="Enter a passport code above to see farm data, pay checks, and map links."
         />
       ) : null}
 
@@ -121,7 +121,7 @@ export default function BuyerPassportPage({ params }: { params: { slug: string }
           <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
             <div className="space-y-6">
               {latestMonth ? (
-                <Card title="Latest compliance record" weight="secondary">
+                <Card title="Latest monthly record" weight="secondary">
                   <div className="space-y-4">
                     <div>
                       <p className="eyebrow text-slate-400">Reporting period</p>
@@ -131,7 +131,7 @@ export default function BuyerPassportPage({ params }: { params: { slug: string }
                     </div>
                     <dl className="grid gap-3 sm:grid-cols-2">
                       <div className="surface-inset p-3">
-                        <dt className="eyebrow text-slate-400">Aggregated yield</dt>
+                        <dt className="eyebrow text-slate-400">Total weight</dt>
                         <dd className="mt-1 font-data text-xl font-semibold text-forest">
                           {latestMonth.aggregatedYieldKg} kg
                         </dd>
@@ -161,13 +161,13 @@ export default function BuyerPassportPage({ params }: { params: { slug: string }
               ) : null}
 
               {data.compliance.allMonths?.length ? (
-                <Card title="Monthly verification history" weight="tertiary">
+                <Card title="All months" weight="tertiary">
                   <MonthlyVerificationList months={data.compliance.allMonths} />
                 </Card>
               ) : null}
 
               {data.custodyTimeline?.length ? (
-                <Card title="Custody timeline" weight="tertiary">
+                <Card title="Shipment timeline" weight="tertiary">
                   <ol className="relative space-y-0 border-l-2 border-amber/25 pl-4">
                     {data.custodyTimeline.map((event: {
                       stage: string;
@@ -211,10 +211,9 @@ export default function BuyerPassportPage({ params }: { params: { slug: string }
               ) : null}
 
               {coordinates ? (
-                <Card title="EUDR deforestation-free mapping" weight="secondary">
+                <Card title="Farm location map" weight="secondary">
                   <BodyText muted className="mb-4">
-                    Farm coordinates for EU deforestation regulation due diligence. Open satellite
-                    imagery to confirm canopy coverage.
+                    GPS from the farm. Open the map to check the area.
                   </BodyText>
                   <ComplianceMapLinks coordinates={coordinates} />
                 </Card>

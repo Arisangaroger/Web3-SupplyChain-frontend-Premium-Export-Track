@@ -35,32 +35,32 @@ export function BuyerPassportPanel({
   return (
     <Card
       step="2"
-      title="Seal export lot & issue buyer passport"
+      title="Issue buyer passport"
       weight="primary"
-      badge="Main action"
+      badge="Main step"
     >
       <SurfaceInset className="space-y-3 p-4">
         <Input
-          label="Internal tracking code"
+          label="Tracking code"
           mono
           value={trackingCode}
           onChange={(e) => onTrackingCodeChange(e.target.value)}
           placeholder="WS-QR-00012345"
         />
         <Input
-          label="Graded / finalized weight (kg, optional)"
+          label="Final weight (kg, optional)"
           mono
           value={finalizedWeightKg}
           onChange={(e) => onFinalizedWeightKgChange(e.target.value)}
         />
         <Button onClick={onIssuePassport} disabled={geoLoading || !trackingCode.trim()}>
-          {geoLoading ? "Capturing GPS…" : "Seal lot & issue buyer passport"}
+          {geoLoading ? "Getting GPS…" : "Issue buyer passport"}
         </Button>
         {passport ? (
           <div className="space-y-3">
             <QrCodeDisplay
               value={passport.passportQrPayload}
-              label="Buyer passport QR — print for importers"
+              label="Buyer passport QR — print for buyers"
             />
             <div className="status-highlight-subtle rounded-lg p-3 text-sm">
               <p className="font-semibold text-amber-900">Public URL:</p>

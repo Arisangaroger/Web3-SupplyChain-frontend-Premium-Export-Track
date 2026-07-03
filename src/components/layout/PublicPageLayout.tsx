@@ -25,7 +25,7 @@ export function PublicPageLayout({
     <PublicSiteLayout>
       <div className="mx-auto w-full max-w-7xl px-4 py-8 lg:px-8 lg:py-10">
         <header className="mb-8 border-b border-forest/10 pb-6">
-          <h1 className="text-display-sm text-forest sm:text-display-md">{title}</h1>
+          <h1 className="font-display text-display-sm text-forest sm:text-display-md">{title}</h1>
           {subtitle ? <p className="mt-2 text-sm text-slate-500 sm:text-base">{subtitle}</p> : null}
         </header>
 

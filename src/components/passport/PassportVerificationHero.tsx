@@ -71,9 +71,9 @@ export function PassportVerificationHero({ data }: { data: PassportHeroData }) {
               <HeroIcon tone={tone} />
             </div>
             <div className="min-w-0">
-              <p className="eyebrow text-slate-500">Buyer compliance passport</p>
+              <p className="eyebrow text-slate-500">Buyer passport</p>
               <p
-                className={`mt-1 text-display-lg font-bold uppercase tracking-tight ${styles.headline}`}
+                className={`mt-1 font-display text-display-lg font-bold uppercase tracking-tight ${styles.headline}`}
               >
                 {headline}
               </p>

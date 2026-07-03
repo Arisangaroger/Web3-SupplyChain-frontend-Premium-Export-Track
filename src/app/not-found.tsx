@@ -9,14 +9,14 @@ export default function NotFound() {
       <EmptyStatePanel
         icon="search"
         title="This page could not be found"
-        description="The URL may be outdated or mistyped. Return home or open a public verification portal."
+        description="The link may be wrong or out of date. Go home or open a public check page."
         action={
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/">
               <Button>Back to home</Button>
             </Link>
             <Link href="/login">
-              <Button variant="ghost">Operator login</Button>
+              <Button variant="ghost">Sign in</Button>
             </Link>
             <Link href="/verify/passport/demo">
               <Button variant="secondary">Verify passport</Button>

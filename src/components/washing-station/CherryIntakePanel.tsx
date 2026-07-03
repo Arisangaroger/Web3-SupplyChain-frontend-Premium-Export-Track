@@ -70,7 +70,7 @@ export function CherryIntakePanel({
             required
           />
           <Input
-            label="Region code (EUDR)"
+            label="Region code"
             mono
             value={regionCode}
             onChange={(e) => onRegionCodeChange(e.target.value)}
@@ -78,7 +78,7 @@ export function CherryIntakePanel({
             required
           />
           <Button type="submit" disabled={geoLoading || !isReady || !farmerId}>
-            {geoLoading ? "Capturing GPS..." : "Log cherry delivery"}
+            {geoLoading ? "Getting GPS…" : "Log cherry delivery"}
           </Button>
         </form>
       </SurfaceInset>

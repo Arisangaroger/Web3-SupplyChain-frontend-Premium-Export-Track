@@ -21,7 +21,7 @@ export function resolveVerificationTone(params: {
   const tampered = params.tamperedMonthCount ?? 0;
   const tamperNote =
     tampered > 0
-      ? `${tampered} compliance month${tampered === 1 ? "" : "s"} failed verification. `
+      ? `${tampered} month${tampered === 1 ? "" : "s"} failed the record check. `
       : "";
 
   if (
@@ -34,7 +34,7 @@ export function resolveVerificationTone(params: {
       headline: "Not verified",
       subtitle:
         tamperNote +
-        (params.latestMessage ?? "Compliance records failed blockchain verification."),
+        (params.latestMessage ?? "Records do not match what was saved on the ledger."),
       status: latestStatus,
     };
   }
@@ -43,7 +43,7 @@ export function resolveVerificationTone(params: {
     return {
       tone: "verified",
       headline: "Verified",
-      subtitle: "Blockchain proof confirmed — this coffee meets on-chain compliance checks.",
+      subtitle: "Ledger proof confirmed — records match what was saved.",
       status: latestStatus,
     };
   }
@@ -51,10 +51,10 @@ export function resolveVerificationTone(params: {
   if (latestStatus === "LOCAL_OK") {
     return {
       tone: "local",
-      headline: "Locally verified",
+      headline: "Checked in system",
       subtitle:
         params.latestMessage ??
-        "Records validated in the system — on-chain anchoring is not yet configured.",
+        "Records look good in the system. Ledger save is not set up yet.",
       status: latestStatus,
     };
   }
@@ -64,7 +64,7 @@ export function resolveVerificationTone(params: {
     headline: "Pending",
     subtitle:
       params.latestMessage ??
-      "Compliance data recorded — awaiting on-chain anchor confirmation.",
+      "Records saved — waiting for ledger confirmation.",
     status: latestStatus,
   };
 }

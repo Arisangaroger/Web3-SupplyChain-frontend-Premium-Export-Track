@@ -4,27 +4,27 @@ type Status = "VERIFIED_ON_CHAIN" | "TAMPER_ALERT" | "PENDING_ANCHOR" | "LOCAL_M
 
 const config: Record<Status, { label: string; className: string; icon: typeof CheckCircle2 }> = {
   VERIFIED_ON_CHAIN: {
-    label: "Verified on Blockchain",
+    label: "Verified on ledger",
     className: "status-highlight",
     icon: CheckCircle2,
   },
   TAMPER_ALERT: {
-    label: "Tamper Alert: Data Mismatch",
+    label: "Data mismatch",
     className: "bg-red-50 text-red-800 border-red-200",
     icon: AlertTriangle,
   },
   PENDING_ANCHOR: {
-    label: "Pending Anchor",
+    label: "Pending save",
     className: "status-highlight-subtle",
     icon: Clock,
   },
   LOCAL_MISMATCH: {
-    label: "Local Data Mismatch",
+    label: "Data mismatch",
     className: "bg-red-50 text-red-800 border-red-200",
     icon: AlertTriangle,
   },
   LOCAL_OK: {
-    label: "Locally Valid",
+    label: "Checked in system",
     className: "bg-slate-50 text-slate-700 border-slate-200",
     icon: CheckCircle2,
   },

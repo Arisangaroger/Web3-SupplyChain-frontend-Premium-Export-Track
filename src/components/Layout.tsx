@@ -54,7 +54,7 @@ export function DashboardLayout({
             <Menu className="h-5 w-5" />
           </button>
           <div className="min-w-0">
-            <h1 className="truncate text-display-sm text-forest">{title}</h1>
+            <h1 className="truncate font-display text-display-sm text-forest">{title}</h1>
           </div>
         </header>
 

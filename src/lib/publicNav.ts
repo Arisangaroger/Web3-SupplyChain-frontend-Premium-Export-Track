@@ -7,9 +7,9 @@ export const PUBLIC_UTILITY_NAV = [
   },
   {
     path: "/verify/passport/demo",
-    label: "Public passport",
+    label: "Buyer passport",
     matchPrefix: "/verify/passport",
-    description: "Scan a sack passport to see farm data and compliance.",
+    description: "Scan a sack passport to see farm data and pay checks.",
   },
   {
     path: "/dashboards/lender",

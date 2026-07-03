@@ -89,7 +89,7 @@ export function LotOperationsPanel({
         batchPeriod,
       );
       setBatchResult(result);
-      setMessage(`Cooperative batch #${result.cooperativeBatchId} ready (${result.totalWeightKg} kg).`);
+      setMessage(`Farmer batch #${result.cooperativeBatchId} ready (${result.totalWeightKg} kg).`);
     });
 
   const onSplit = () =>
@@ -102,11 +102,11 @@ export function LotOperationsPanel({
         }));
 
       if (!splitLotCode.trim() || parsed.length === 0) {
-        throw new Error("Lot code and at least one allocation are required");
+        throw new Error("Lot code and at least one farmer share are required");
       }
 
       const result = await splitLot(splitLotCode.trim(), parsed);
-      setMessage(`Lot ${result.lotCode} split with ${result.allocations?.length ?? 0} allocation(s).`);
+      setMessage(`Lot ${result.lotCode} split with ${result.allocations?.length ?? 0} farmer share(s).`);
     });
 
   const onMerge = () =>
@@ -135,14 +135,14 @@ export function LotOperationsPanel({
     run(async () => {
       const result = await validateLot(validateLotCode.trim());
       setValidateResult(result);
-      setMessage(`Validation complete for lot ${result.lotCode}.`);
+      setMessage(`Check complete for lot ${result.lotCode}.`);
     });
 
   return (
     <div className="space-y-6">
       {mode === "exporter" ? (
         <>
-          <Card step="1" title="Create cooperative batch (from monthly farmer record)" weight="secondary">
+          <Card step="1" title="Create farmer batch" weight="secondary">
             <div className="grid gap-3 sm:grid-cols-2">
               <Input
                 label="Farmer ID"
@@ -181,7 +181,7 @@ export function LotOperationsPanel({
             ) : null}
           </Card>
 
-          <Card step="2" title="Split batch weight into export lot" weight="primary" badge="Main action">
+          <Card step="2" title="Add batch to export lot" weight="primary" badge="Main step">
             <div className="space-y-3">
               <Input
                 label="Export lot code"
@@ -221,7 +221,7 @@ export function LotOperationsPanel({
                     setAllocations([...allocations, { cooperativeBatchId: "", allocatedWeightKg: "" }])
                   }
                 >
-                  Add allocation row
+                  Add another share
                 </Button>
                 <Button onClick={onSplit} disabled={loading}>
                   Split into lot
@@ -254,7 +254,7 @@ export function LotOperationsPanel({
 
       <Card
         step={mode === "exporter" ? "4" : "1"}
-        title="Lot traceability"
+        title="Lot lookup"
         weight="tertiary"
       >
         <div className="flex flex-wrap items-end gap-3">
@@ -309,8 +309,8 @@ export function LotOperationsPanel({
               <EmptyStatePanel
                 compact
                 icon="package"
-                title="No allocations on this lot"
-                description="Split cooperative batch weight into this lot before traceability data will appear here."
+                title="No farmer shares on this lot"
+                description="Add batch weight to this lot first. Then you can load lot details here."
               />
             )}
           </div>
@@ -319,7 +319,7 @@ export function LotOperationsPanel({
 
       <Card
         step={mode === "exporter" ? "5" : "2"}
-        title="Validate lot (trace + buyer verification)"
+        title="Check lot"
         weight="secondary"
       >
         <div className="flex flex-wrap items-end gap-3">
@@ -330,7 +330,7 @@ export function LotOperationsPanel({
             onChange={(e) => setValidateLotCode(e.target.value)}
           />
           <Button onClick={onValidate} disabled={loading || !validateLotCode.trim()}>
-            Validate lot
+            Validate
           </Button>
         </div>
         {validateResult ? (
@@ -338,14 +338,14 @@ export function LotOperationsPanel({
             <p>
               Lot:{" "}
               <DataValue className="font-semibold text-forest">{validateResult.lotCode}</DataValue> ·
-              Trace status:{" "}
+              Lot status:{" "}
               <DataValue className="font-semibold uppercase">
                 {validateResult.traceability?.status ?? "—"}
               </DataValue>
             </p>
             {validateResult.verification?.found === false ? (
               <BodyText className="text-amber-800">
-                No buyer verification record for this lot.
+                No buyer check record for this lot.
               </BodyText>
             ) : null}
             {validateResult.verification?.found &&
@@ -371,7 +371,7 @@ export function LotOperationsPanel({
                       {alloc.verification ? (
                         <VerificationBadge status={alloc.verification.status as "VERIFIED_ON_CHAIN"} />
                       ) : (
-                        <TypeLabel className="text-amber-800">Not yet verified on-chain</TypeLabel>
+                        <TypeLabel className="text-amber-800">Not yet checked on ledger</TypeLabel>
                       )}
                     </div>
                   ),

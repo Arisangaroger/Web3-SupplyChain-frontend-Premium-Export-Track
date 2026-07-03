@@ -27,7 +27,7 @@ const TRUST_PILLARS = [
   },
   {
     title: "Safe records",
-    description: "Monthly data is stored on-chain so changes can be spotted.",
+    description: "Monthly data is saved to a ledger so changes can be spotted.",
   },
 ];
 
@@ -75,8 +75,7 @@ export function LandingPage() {
             Clear records at every step
           </h2>
           <p className="lead mt-3">
-            Staff run the day-to-day work. Buyers and auditors use open pages to verify sacks and
-            lots.
+            Staff run the day-to-day work. Buyers use open pages to check sacks and lots.
           </p>
         </div>
 
@@ -115,7 +114,7 @@ export function LandingPage() {
                 <span className="mt-3 flex h-10 w-10 items-center justify-center rounded-lg border border-forest/10 bg-inset text-forest">
                   <Icon className="h-5 w-5" aria-hidden />
                 </span>
-                <p className="mt-4 text-sm font-medium leading-snug text-slate-700">{label}</p>
+                <p className="mt-4 font-display text-sm font-medium leading-snug text-slate-700">{label}</p>
               </li>
             ))}
           </ol>

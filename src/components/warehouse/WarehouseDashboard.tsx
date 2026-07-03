@@ -33,7 +33,7 @@ const HERO_BY_SECTION: Record<
     getValue: (ctx) => ctx.trackingCode || "—",
   },
   "storage-intake": {
-    label: "Target lifecycle stage",
+    label: "Current step",
     getValue: () => stageNumber(),
   },
   "lot-operations": {
@@ -123,7 +123,7 @@ export function WarehouseDashboard() {
 
   const heroSublabel =
     activeSection === "lot-operations"
-      ? "Lot traceability & validation"
+      ? "Lot lookup & check"
       : STAGE_LABELS[TARGET_STAGE];
 
   return (
@@ -176,7 +176,7 @@ export function WarehouseDashboard() {
                 {timeline.currentStage.replace(/_/g, " ")}
               </p>
               <p className="mt-2 text-sm text-slate-600">
-                {timeline.events.length} custody event{timeline.events.length === 1 ? "" : "s"}{" "}
+                {timeline.events.length} step{timeline.events.length === 1 ? "" : "s"}{" "}
                 recorded on this sack.
               </p>
             </div>

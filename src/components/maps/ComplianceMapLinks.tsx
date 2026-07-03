@@ -31,7 +31,7 @@ export function ComplianceMapLinks({ coordinates }: { coordinates: string }) {
         <MapPin className="h-5 w-5 text-forest" />
         <div>
           <p className="font-medium text-forest">Google Maps Satellite</p>
-          <p className="text-xs text-slate-500">Inspect farm boundary imagery</p>
+          <p className="text-xs text-slate-500">Inspect farm on satellite map</p>
         </div>
         <ExternalLink className="ml-auto h-4 w-4 text-slate-400" />
       </a>
@@ -45,7 +45,7 @@ export function ComplianceMapLinks({ coordinates }: { coordinates: string }) {
         <Trees className="h-5 w-5 text-forest" />
         <div>
           <p className="font-medium text-forest">Global Forest Watch</p>
-          <p className="text-xs text-slate-500">Trace canopy history to 2020</p>
+          <p className="text-xs text-slate-500">See tree cover history</p>
         </div>
         <ExternalLink className="ml-auto h-4 w-4 text-slate-400" />
       </a>
@@ -60,7 +60,7 @@ export function OpenMapsButton({ coordinates }: { coordinates: string }) {
       variant="secondary"
       onClick={() => window.open(buildGoogleMapsSatelliteUrl(coordinates), "_blank")}
     >
-      Open Compliance Maps
+      Open farm maps
     </Button>
   );
 }

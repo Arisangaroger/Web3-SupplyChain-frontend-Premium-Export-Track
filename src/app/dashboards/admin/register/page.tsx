@@ -35,7 +35,7 @@ export default function AdminRegisterPage() {
         role,
       });
       setMessage(
-        `Operator created: ${result.operator.email} (${result.operator.role}). They can sign in now.`,
+        `User created: ${result.operator.email} (${result.operator.role}). They can sign in now.`,
       );
       setEmail("");
       setPassword("");
@@ -47,20 +47,20 @@ export default function AdminRegisterPage() {
   };
 
   return (
-    <DashboardLayout title="Admin — Register Operator" allowedRoles={ALLOWED_ROLES}>
+    <DashboardLayout title="Admin — Add user" allowedRoles={ALLOWED_ROLES}>
       <DashboardHeroStrip
-        label="Operator registration"
+        label="New user"
         value="1"
-        sublabel="Create one operator account per form submission"
+        sublabel="One account per form"
         valueClassName="text-amber"
       />
       <BodyText muted className="mb-4">
-        Create operator accounts for washing stations, exporters, warehouse staff, and port
-        operators. Washing station operators are assigned to the default station automatically.
-        ADMIN accounts cannot be created through this form.
+        Create accounts for washing stations, exporters, warehouse staff, and port workers.
+        Washing station users are linked to a station automatically. You cannot create admin
+        accounts here.
       </BodyText>
 
-      <Card step="1" title="Create operator account" weight="primary" badge="Admin action">
+      <Card step="1" title="Create user account" weight="primary" badge="Admin">
         <SurfaceInset className="max-w-md p-4">
         <form onSubmit={onSubmit} className="space-y-4">
           <Input
@@ -95,7 +95,7 @@ export default function AdminRegisterPage() {
           {error ? <FormErrorBanner>{error}</FormErrorBanner> : null}
           {message ? <FormSuccessBanner>{message}</FormSuccessBanner> : null}
           <Button type="submit" disabled={loading}>
-            {loading ? "Creating…" : "Create operator"}
+            {loading ? "Creating…" : "Create user"}
           </Button>
         </form>
         </SurfaceInset>

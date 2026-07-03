@@ -154,7 +154,7 @@ export function WashingStationDashboard() {
   const onScanTrackingQr = (raw: string) => {
     const code = parseTrackingCode(raw);
     setTrackingCode(code);
-    setMessage(`Scanned pre-printed tracking QR: ${code}`);
+    setMessage(`Scanned tracking code: ${code}`);
     setError(null);
   };
 
@@ -189,7 +189,7 @@ export function WashingStationDashboard() {
       try {
         await submitDelivery(payload);
         setMessage(
-          `Cherry intake logged for ${selectedFarmerLabel}. Process coffee, then scan the pre-printed sack QR.`,
+          `Cherry intake logged for ${selectedFarmerLabel}. Process the coffee, then scan the sack sticker.`,
         );
         setActiveSection("sack-qr");
       } catch (submitError) {
@@ -214,7 +214,7 @@ export function WashingStationDashboard() {
     setRegisteredSack(null);
 
     if (!trackingCode.trim()) {
-      setError("Scan or enter the pre-printed tracking QR on the sack.");
+      setError("Scan or enter the tracking code on the sack.");
       return;
     }
 

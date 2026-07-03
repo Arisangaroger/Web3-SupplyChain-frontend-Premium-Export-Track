@@ -34,7 +34,7 @@ export function StationScopePanel({
   }
 
   return (
-    <Card title="Washing station scope" weight="tertiary" className="mb-6">
+    <Card title="Your station" weight="tertiary" className="mb-6">
       <Input
         label="Washing station ID"
         mono

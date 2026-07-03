@@ -10,10 +10,10 @@ export function TamperAlertBanner({ count }: { count: number }) {
     >
       <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-red-600" aria-hidden />
       <div>
-        <p className="font-semibold">Verification integrity warning</p>
+        <p className="font-semibold">Record check failed</p>
         <p className="mt-1 text-red-800">
-          {count} compliance month{count === 1 ? "" : "s"} failed blockchain verification. Contact
-          your exporter before accepting this shipment.
+          {count} month{count === 1 ? "" : "s"} did not match the ledger. Contact your exporter
+          before accepting this shipment.
         </p>
       </div>
     </div>

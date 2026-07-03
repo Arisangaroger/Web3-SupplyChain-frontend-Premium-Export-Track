@@ -37,16 +37,12 @@ export function PortTrackScanPanel({
 }: Props) {
   return (
     <div className="grid gap-6 lg:grid-cols-2">
-      <QrScanner
-        onScan={onScan}
-        title="Scan container / pallet QR at port clearance"
-        weight="secondary"
-      />
+      <QrScanner onScan={onScan} title="Scan container or pallet QR" weight="secondary" />
 
-      <Card step="1" title="Load supply chain timeline" weight="secondary">
+      <Card step="1" title="Load timeline" weight="secondary">
         <div className="space-y-3">
           <Input
-            label="Tracking / lot code"
+            label="Tracking code"
             mono
             value={trackingCode}
             onChange={(e) => onTrackingCodeChange(e.target.value)}
@@ -60,13 +56,13 @@ export function PortTrackScanPanel({
 
       {loading ? (
         <div className="lg:col-span-2">
-          <LoadingStatePanel label="Loading supply chain timeline…" />
+          <LoadingStatePanel label="Loading timeline…" />
         </div>
       ) : timeline ? (
-        <Card title="Supply chain progress" weight="primary" badge="Verification result" className="lg:col-span-2">
+        <Card title="Progress" weight="primary" badge="Result" className="lg:col-span-2">
           {timeline.passportSlug ? (
             <BodyText className="mb-3 font-medium text-forest">
-              Buyer passport issued:{" "}
+              Buyer passport:{" "}
               <Link
                 href={`/verify/passport/${encodeURIComponent(timeline.passportSlug)}`}
                 className="font-data font-semibold text-amber-800 hover:underline"
@@ -82,12 +78,12 @@ export function PortTrackScanPanel({
           />
         </Card>
       ) : (
-        <Card title="Supply chain progress" weight="tertiary" className="lg:col-span-2">
+        <Card title="Progress" weight="tertiary" className="lg:col-span-2">
           <EmptyStatePanel
             compact
             icon="chain"
             title="No timeline loaded"
-            description="Scan the container or pallet QR, then load the timeline to confirm prior custody stages before port clearance."
+            description="Scan the code and load the timeline before port clearance."
           />
         </Card>
       )}

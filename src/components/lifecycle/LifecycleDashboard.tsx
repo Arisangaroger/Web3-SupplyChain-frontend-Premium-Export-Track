@@ -95,7 +95,7 @@ export function LifecycleDashboard({
   return (
     <DashboardLayout title={title} allowedRoles={allowedRoles}>
       <DashboardHeroStrip
-        label="Target lifecycle stage"
+        label="Current step"
         value={stageNumber(targetStage)}
         sublabel={STAGE_LABELS[targetStage]}
       />
@@ -116,7 +116,7 @@ export function LifecycleDashboard({
               onChange={(e) => setTrackingCode(e.target.value)}
             />
             <TypeLabel>
-              Operator: {operator?.role} → records stage{" "}
+              User: {operator?.role} → records step{" "}
               <DataValue className="font-semibold">{targetStage}</DataValue>
             </TypeLabel>
             <div className="flex flex-wrap gap-2">
@@ -125,10 +125,10 @@ export function LifecycleDashboard({
                 onClick={() => loadTimeline(parseTrackingCode(trackingCode))}
                 disabled={!trackingCode}
               >
-                Load Timeline
+                Load timeline
               </Button>
               <Button onClick={onAdvance} disabled={loading || !trackingCode}>
-                {loading ? "Capturing GPS..." : "Record Stage + Location"}
+                {loading ? "Getting GPS…" : "Record step + GPS"}
               </Button>
             </div>
             {error ? <FormErrorBanner>{error}</FormErrorBanner> : null}
@@ -138,10 +138,10 @@ export function LifecycleDashboard({
 
         {loading ? (
           <div className="lg:col-span-2">
-            <LoadingStatePanel label="Capturing GPS coordinates…" />
+            <LoadingStatePanel label="Getting GPS…" />
           </div>
         ) : timeline ? (
-          <Card title="Supply Chain Progress" weight="secondary" className="lg:col-span-2">
+          <Card title="Progress" weight="secondary" className="lg:col-span-2">
             <LifecycleTimeline
               currentStage={timeline.currentStage}
               locked={timeline.locked}
@@ -149,12 +149,12 @@ export function LifecycleDashboard({
             />
           </Card>
         ) : (
-          <Card title="Supply chain progress" weight="tertiary" className="lg:col-span-2">
+          <Card title="Progress" weight="tertiary" className="lg:col-span-2">
             <EmptyStatePanel
               compact
               icon="chain"
               title="No timeline loaded"
-              description="Scan a TRACK QR code, enter the tracking ID, and tap Load Timeline to see custody stages and GPS stamps for this sack."
+              description="Scan the tracking code, enter it, and tap Load timeline to see each step and GPS for this sack."
             />
           </Card>
         )}

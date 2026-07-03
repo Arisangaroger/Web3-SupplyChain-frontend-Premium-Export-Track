@@ -49,11 +49,11 @@ interface Props {
 }
 
 const FACTOR_LABELS: Record<string, string> = {
-  onChainVerification: "On-chain verification",
-  integrity: "Data integrity",
+  onChainVerification: "Ledger check",
+  integrity: "Record integrity",
   wageCompliance: "Living wage",
-  deliveryConsistency: "Delivery consistency",
-  yieldStability: "Yield stability",
+  deliveryConsistency: "Regular deliveries",
+  yieldStability: "Stable harvest",
 };
 
 export function CreditScorePanel({

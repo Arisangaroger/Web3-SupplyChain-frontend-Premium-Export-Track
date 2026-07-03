@@ -22,21 +22,21 @@ export function PortClearancePanel({
   onRecordStage,
 }: Props) {
   return (
-    <Card step="2" title="Confirm port lock & GPS" weight="primary" badge="Main action">
+    <Card step="2" title="Final port lock + GPS" weight="primary" badge="Main step">
       <SurfaceInset className="space-y-3 p-4">
         <Input
-          label="Tracking / lot code"
+          label="Tracking code"
           mono
           value={trackingCode}
           onChange={(e) => onTrackingCodeChange(e.target.value)}
           placeholder="WS-QR-00012345"
         />
         <TypeLabel>
-          Operator: {operatorRole ?? "—"} → records stage{" "}
-          <DataValue className="font-semibold">PORT_LOCKED</DataValue>
+          User: {operatorRole ?? "—"} → records{" "}
+          <DataValue className="font-semibold">port lock</DataValue>
         </TypeLabel>
         <Button onClick={onRecordStage} disabled={geoLoading || !trackingCode.trim()}>
-          {geoLoading ? "Capturing GPS…" : "Record final lock + location"}
+          {geoLoading ? "Getting GPS…" : "Record final lock + GPS"}
         </Button>
       </SurfaceInset>
     </Card>

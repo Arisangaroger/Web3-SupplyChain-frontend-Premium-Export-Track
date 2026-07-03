@@ -19,7 +19,7 @@ const PORTAL_META: Record<
   },
   "/verify/passport/demo": {
     icon: ShieldCheck,
-    audience: "Importers",
+    audience: "Buyers",
     highlight: "One sack",
   },
   "/dashboards/lender": {
@@ -29,7 +29,7 @@ const PORTAL_META: Record<
   },
 };
 
-const TRUST_STRIP = ["No account needed", "Fast lookup", "Blockchain checked"];
+const TRUST_STRIP = ["No account needed", "Fast lookup", "Ledger checked"];
 
 export function PublicPortalsSection() {
   return (
@@ -50,7 +50,7 @@ export function PublicPortalsSection() {
             Check coffee online
           </h2>
           <p className="lead mx-auto mt-4">
-            Enter a code or scan a QR. See farm data, pay checks, and blockchain proof in seconds.
+            Enter a code or scan a QR. See farm data, pay checks, and ledger proof in seconds.
           </p>
         </div>
 

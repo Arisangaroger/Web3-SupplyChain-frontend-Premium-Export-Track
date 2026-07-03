@@ -37,7 +37,7 @@ function aggregateLotVerification(
       latestStatus: "PENDING_ANCHOR",
       tamperedCount: 0,
       verifiedCount: 0,
-      latestMessage: "This lot exists but has no farmer allocations yet.",
+      latestMessage: "This lot exists but has no farmer shares yet.",
     };
   }
 
@@ -124,9 +124,9 @@ export function LotVerificationHero({
               <HeroIcon tone={tone} />
             </div>
             <div className="min-w-0">
-              <p className="eyebrow text-slate-500">Export lot traceability</p>
+              <p className="eyebrow text-slate-500">Export lot check</p>
               <p
-                className={`mt-1 text-display-lg font-bold uppercase tracking-tight ${styles.headline}`}
+                className={`mt-1 font-display text-display-lg font-bold uppercase tracking-tight ${styles.headline}`}
               >
                 {headline}
               </p>
@@ -185,13 +185,13 @@ export function LotVerificationHero({
           {aggregate.verifiedCount > 0 ? (
             <p>
               <DataValue className="font-semibold">{aggregate.verifiedCount}</DataValue> verified
-              allocation{aggregate.verifiedCount === 1 ? "" : "s"}
+              verified share{aggregate.verifiedCount === 1 ? "" : "s"}
             </p>
           ) : null}
           {aggregate.tamperedCount > 0 ? (
             <p className="font-medium text-red-700">
               <DataValue className="font-semibold text-red-700">{aggregate.tamperedCount}</DataValue>{" "}
-              failed allocation{aggregate.tamperedCount === 1 ? "" : "s"}
+              failed share{aggregate.tamperedCount === 1 ? "" : "s"}
             </p>
           ) : null}
           {mode === "LEGACY_LOT" && month ? (

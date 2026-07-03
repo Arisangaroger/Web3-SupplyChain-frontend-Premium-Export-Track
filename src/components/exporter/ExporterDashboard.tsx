@@ -111,7 +111,7 @@ export function ExporterDashboard() {
     setTrackingCode(parsed);
     setMessage(
       <>
-        Scanned internal tracking QR: <DataValue className="font-semibold">{parsed}</DataValue>
+        Scanned tracking code: <DataValue className="font-semibold">{parsed}</DataValue>
       </>,
     );
     setError(null);
@@ -138,7 +138,7 @@ export function ExporterDashboard() {
     setPassport(null);
 
     if (!trackingCode.trim()) {
-      setError("Scan the internal TRACK QR from the export sack first.");
+      setError("Scan the tracking code on the export sack first.");
       return;
     }
 
@@ -167,7 +167,7 @@ export function ExporterDashboard() {
     activeSection === "buyer-passport" && (passport?.passportSlug ?? timeline?.passportSlug)
       ? (passport?.passportSlug ?? timeline?.passportSlug)!
       : activeSection === "lot-operations"
-        ? "Batch split, merge & validation"
+        ? "Split, merge & check lots"
         : STAGE_LABELS.AT_EXPORT_LOT;
 
   return (
@@ -182,7 +182,7 @@ export function ExporterDashboard() {
 
       <BodyText muted className="mb-4">
         Scan the <strong>tracking code</strong> from the washing station sack. After sorting, seal
-        the lot and print the <strong>buyer passport QR</strong> for importers.
+        the lot and print the <strong>buyer passport QR</strong> for buyers.
       </BodyText>
 
       <StationScopePanel

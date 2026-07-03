@@ -47,7 +47,7 @@ export function PublicSidebar({ mobileOpen, onMobileOpen, onMobileClose }: Props
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-forest/15 bg-white shadow-sm">
               <Leaf className="h-5 w-5 text-forest" aria-hidden />
             </span>
-            <span className="truncate text-sm font-semibold text-forest">{APP_NAME}</span>
+            <span className="truncate font-display text-sm font-semibold text-forest">{APP_NAME}</span>
           </Link>
           <button
             type="button"
@@ -81,7 +81,7 @@ export function PublicSidebar({ mobileOpen, onMobileOpen, onMobileClose }: Props
 
           <section>
             <p className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
-              Operators
+              Staff
             </p>
             <div className="space-y-1">
               <NavSidebarLink

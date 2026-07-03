@@ -38,7 +38,7 @@ export function VerifyLookupPanel({
   title = "Look up record",
   titleAfterResult = "Look up another record",
   description = "Scan the QR code or enter the code manually.",
-  descriptionAfterResult = "Scan or enter a different code to verify another record.",
+  descriptionAfterResult = "Scan or enter a different code to check another record.",
   onInputChange,
   onVerify,
   onScan,
@@ -50,7 +50,7 @@ export function VerifyLookupPanel({
   }, [hasResult]);
 
   if (loading && !hasResult) {
-    return <LoadingStatePanel label="Verifying record…" />;
+    return <LoadingStatePanel label="Checking…" />;
   }
 
   return (
@@ -109,7 +109,7 @@ export function VerifyLookupPanel({
           className="rounded-lg bg-forest px-5 py-2 type-body font-medium text-white transition hover:bg-forest-light disabled:opacity-60"
           disabled={loading || !input.trim()}
         >
-          {loading ? "Verifying…" : verifyLabel}
+          {loading ? "Checking…" : verifyLabel}
         </button>
       </div>
       {error ? <FormErrorBanner>{error}</FormErrorBanner> : null}

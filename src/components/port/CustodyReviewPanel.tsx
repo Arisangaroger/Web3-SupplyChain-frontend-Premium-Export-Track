@@ -22,12 +22,12 @@ interface Props {
 export function CustodyReviewPanel({ trackingCode, timeline }: Props) {
   if (!timeline) {
     return (
-      <Card title="Custody review" weight="tertiary">
+      <Card title="Shipment review" weight="tertiary">
         <EmptyStatePanel
           compact
           icon="chain"
           title="No shipment loaded"
-          description="Scan and load a tracking code in Track scan first, then return here to review the full custody record."
+          description="Scan and load a tracking code in Track scan first, then come back here to see the full path."
         />
       </Card>
     );
@@ -44,7 +44,7 @@ export function CustodyReviewPanel({ trackingCode, timeline }: Props) {
         </div>
         <div className="rounded-xl border border-forest/10 bg-inset/30 p-4">
           <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            Current stage
+            Current step
           </p>
           <p className="mt-2 font-data text-sm font-semibold text-forest">
             {timeline.currentStage.replace(/_/g, " ")}
@@ -56,16 +56,16 @@ export function CustodyReviewPanel({ trackingCode, timeline }: Props) {
             {timeline.locked ? (
               <span className="locked-badge">Locked at port</span>
             ) : (
-              <span className="text-amber-800">Awaiting final lock</span>
+              <span className="text-amber-800">Not locked yet</span>
             )}
           </p>
         </div>
       </div>
 
-      <Card title="Full custody timeline" weight="secondary">
+      <Card title="Full shipment path" weight="secondary">
         {timeline.passportSlug ? (
           <BodyText className="mb-3 font-medium text-forest">
-            Public passport:{" "}
+            Buyer passport:{" "}
             <Link
               href={`/verify/passport/${encodeURIComponent(timeline.passportSlug)}`}
               className="font-data font-semibold text-amber-800 hover:underline"
@@ -75,8 +75,8 @@ export function CustodyReviewPanel({ trackingCode, timeline }: Props) {
           </BodyText>
         ) : null}
         <p className="mb-4 text-sm text-slate-600">
-          <DataValue className="font-semibold">{timeline.events.length}</DataValue> custody event
-          {timeline.events.length === 1 ? "" : "s"} on record for this shipment.
+          <DataValue className="font-semibold">{timeline.events.length}</DataValue> step
+          {timeline.events.length === 1 ? "" : "s"} recorded for this shipment.
         </p>
         <LifecycleTimeline
           currentStage={timeline.currentStage}
