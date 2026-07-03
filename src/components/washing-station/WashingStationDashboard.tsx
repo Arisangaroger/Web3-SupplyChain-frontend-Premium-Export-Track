@@ -4,6 +4,7 @@ import { FormEvent, useCallback, useEffect, useState } from "react";
 import { DashboardLayout } from "@/components/Layout";
 import { RollupJobPanel } from "@/components/rollup/RollupJobPanel";
 import { CherryIntakePanel } from "@/components/washing-station/CherryIntakePanel";
+import { FarmersPanel } from "@/components/washing-station/FarmersPanel";
 import { OfflineSyncPanel } from "@/components/washing-station/OfflineSyncPanel";
 import { SackQrPanel } from "@/components/washing-station/SackQrPanel";
 import { StationScopePanel } from "@/components/washing-station/StationScopePanel";
@@ -23,7 +24,6 @@ import {
   getApiErrorMessage,
   isOfflineEligibleError,
   listIntakeFarmers,
-  registerIntakeFarmer,
   registerPrePrintedTrackingQr,
   submitDelivery,
   type FarmerSummary,
@@ -36,6 +36,10 @@ const HERO_BY_SECTION: Record<
   WashingStationSection,
   { label: string; getValue: (ctx: HeroContext) => string; unit?: string }
 > = {
+  farmers: {
+    label: "Registered farmers",
+    getValue: (ctx) => String(ctx.farmerCount),
+  },
   intake: {
     label: "Cherry intake weight",
     getValue: (ctx) => ctx.weightKg,
@@ -61,6 +65,7 @@ interface HeroContext {
   targetPeriod: string;
   pendingCount: number;
   farmerId: string;
+  farmerCount: number;
   washingStationId: string;
 }
 
@@ -92,6 +97,7 @@ export function WashingStationDashboard() {
     timeline: { currentStage: string; locked: boolean; events: unknown[] };
   } | null>(null);
   const [farmers, setFarmers] = useState<FarmerSummary[]>([]);
+  const [farmerCount, setFarmerCount] = useState(0);
   const [farmersLoading, setFarmersLoading] = useState(false);
 
   const washingStationId = stationId;
@@ -104,6 +110,7 @@ export function WashingStationDashboard() {
     targetPeriod,
     pendingCount,
     farmerId,
+    farmerCount,
     washingStationId,
   };
 
@@ -115,18 +122,22 @@ export function WashingStationDashboard() {
     setError(null);
   };
 
-  const refreshFarmers = useCallback(async () => {
+  const refreshFarmersForDropdown = useCallback(async () => {
     if (!isReady) {
       setFarmers([]);
+      setFarmerCount(0);
       return;
     }
 
     setFarmersLoading(true);
     try {
-      const data = await listIntakeFarmers(
-        isBoundToStation ? undefined : washingStationId,
-      );
+      const data = await listIntakeFarmers({
+        washingStationId: isBoundToStation ? undefined : washingStationId,
+        page: 1,
+        limit: 500,
+      });
       setFarmers(data.farmers);
+      setFarmerCount(data.total);
     } catch (err) {
       setError(getApiErrorMessage(err, "Failed to load farmers for this station"));
     } finally {
@@ -135,24 +146,8 @@ export function WashingStationDashboard() {
   }, [isBoundToStation, isReady, washingStationId]);
 
   useEffect(() => {
-    void refreshFarmers();
-  }, [refreshFarmers]);
-
-  const onRegisterFarmer = async (fullName: string, kycReference?: string) => {
-    clearFeedback();
-    try {
-      const result = await registerIntakeFarmer(
-        { fullName, kycReference },
-        isBoundToStation ? undefined : washingStationId,
-      );
-      setFarmerId(String(result.farmer.id));
-      setMessage(`Registered farmer #${result.farmer.id} — ${result.farmer.fullName}`);
-      await refreshFarmers();
-    } catch (err) {
-      setError(getApiErrorMessage(err, "Failed to register farmer"));
-      throw err;
-    }
-  };
+    void refreshFarmersForDropdown();
+  }, [refreshFarmersForDropdown]);
 
   const onScanTrackingQr = (raw: string) => {
     const code = parseTrackingCode(raw);
@@ -275,6 +270,15 @@ export function WashingStationDashboard() {
         offlineFailedCount={failedCount}
       />
 
+      {activeSection === "farmers" ? (
+        <FarmersPanel
+          isReady={isReady}
+          isBoundToStation={isBoundToStation}
+          washingStationId={washingStationId}
+          onFarmersChanged={refreshFarmersForDropdown}
+        />
+      ) : null}
+
       {activeSection === "intake" ? (
         <CherryIntakePanel
           farmerId={farmerId}
@@ -289,7 +293,7 @@ export function WashingStationDashboard() {
           onWeightKgChange={setWeightKg}
           onBasePriceChange={setBasePrice}
           onRegionCodeChange={setRegionCode}
-          onRegisterFarmer={onRegisterFarmer}
+          onGoToFarmersTab={() => setActiveSection("farmers")}
           onSubmit={onSubmitDelivery}
         />
       ) : null}

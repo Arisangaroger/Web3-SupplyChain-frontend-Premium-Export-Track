@@ -103,6 +103,18 @@ export interface FarmerSummary {
   id: number;
   fullName: string;
   kycReference?: string | null;
+  createdAt?: string;
+  deliveryCount?: number;
+  totalWeightKg?: number;
+}
+
+export interface PaginatedFarmersResponse {
+  washingStationId: string;
+  farmers: FarmerSummary[];
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
 }
 
 export async function login(payload: LoginPayload) {
@@ -132,11 +144,14 @@ export async function submitDelivery(payload: DeliveryPayload) {
   return data;
 }
 
-export async function listIntakeFarmers(washingStationId?: string) {
-  const { data } = await api.get<{ washingStationId: string; farmers: FarmerSummary[] }>(
-    "/intake/farmers",
-    { params: washingStationId ? { washingStationId } : undefined },
-  );
+export async function listIntakeFarmers(options?: {
+  washingStationId?: string;
+  page?: number;
+  limit?: number;
+}) {
+  const { data } = await api.get<PaginatedFarmersResponse>("/intake/farmers", {
+    params: options,
+  });
   return data;
 }
 

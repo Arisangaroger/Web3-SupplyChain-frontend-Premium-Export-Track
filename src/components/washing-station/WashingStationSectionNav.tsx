@@ -1,12 +1,17 @@
 "use client";
 
-export type WashingStationSection = "intake" | "sack-qr" | "rollup" | "offline";
+export type WashingStationSection = "farmers" | "intake" | "sack-qr" | "rollup" | "offline";
 
 export const WASHING_STATION_SECTIONS: {
   id: WashingStationSection;
   label: string;
   description: string;
 }[] = [
+  {
+    id: "farmers",
+    label: "Farmers",
+    description: "Register members and browse station records",
+  },
   {
     id: "intake",
     label: "Cherry intake",
