@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   title: "Premium Export Track | Supply Chain",
   description:
     "Traceable Rwanda coffee supply chain with public verification portals for buyers, lenders, and auditors.",
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/apple-icon.svg", type: "image/svg+xml" }],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
