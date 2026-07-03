@@ -91,12 +91,18 @@ export interface LoginPayload {
 
 export interface DeliveryPayload {
   farmerId: number;
-  washingStationId: string;
+  washingStationId?: string;
   deliveryDate: string;
   weightKg: number;
   basePricePerKg: number;
   eudrCoordinates: string;
   regionCode: string;
+}
+
+export interface FarmerSummary {
+  id: number;
+  fullName: string;
+  kycReference?: string | null;
 }
 
 export async function login(payload: LoginPayload) {
@@ -123,6 +129,26 @@ export async function getLifecycleStages() {
 
 export async function submitDelivery(payload: DeliveryPayload) {
   const { data } = await api.post("/intake/deliveries", payload);
+  return data;
+}
+
+export async function listIntakeFarmers(washingStationId?: string) {
+  const { data } = await api.get<{ washingStationId: string; farmers: FarmerSummary[] }>(
+    "/intake/farmers",
+    { params: washingStationId ? { washingStationId } : undefined },
+  );
+  return data;
+}
+
+export async function registerIntakeFarmer(
+  payload: { fullName: string; kycReference?: string },
+  washingStationId?: string,
+) {
+  const { data } = await api.post<{ farmer: FarmerSummary; washingStationId: string }>(
+    "/intake/farmers",
+    payload,
+    { params: washingStationId ? { washingStationId } : undefined },
+  );
   return data;
 }
 

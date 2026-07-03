@@ -9,9 +9,26 @@ interface Props {
   onStationIdChange: (value: string) => void;
   isReady: boolean;
   editable: boolean;
+  isBoundToStation?: boolean;
 }
 
-export function StationScopePanel({ stationId, onStationIdChange, isReady, editable }: Props) {
+export function StationScopePanel({
+  stationId,
+  onStationIdChange,
+  isReady,
+  editable,
+  isBoundToStation = false,
+}: Props) {
+  if (isBoundToStation && isReady) {
+    return (
+      <Card title="Your washing station" weight="tertiary" className="mb-6">
+        <TypeLabel className="font-data text-forest">
+          Station ID: <strong>{stationId}</strong> — deliveries are logged to this station automatically.
+        </TypeLabel>
+      </Card>
+    );
+  }
+
   if (!editable && isReady) {
     return null;
   }
