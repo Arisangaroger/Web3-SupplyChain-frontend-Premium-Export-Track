@@ -21,6 +21,7 @@ import { parseTrackingCode } from "@/lib/lifecycle";
 import type { OperatorRole } from "@/lib/roles";
 import {
   getApiErrorMessage,
+  isOfflineEligibleError,
   registerPrePrintedTrackingQr,
   submitDelivery,
 } from "@/services/api";
@@ -65,7 +66,7 @@ export function WashingStationDashboard() {
   const { stationId, setStationId, editable: stationEditable, isReady } =
     useWashingStationId(operator);
   const { capture, toCoordinateString, loading: geoLoading } = useGeolocation();
-  const { pendingCount, failedCount, failedRecords, syncing, syncPending, retryFailed } =
+  const { pendingCount, failedCount, failedRecords, syncing, syncPending, retryFailed, refreshCount } =
     useOfflineSync();
 
   const [activeSection, setActiveSection] = useState<WashingStationSection>("intake");
@@ -140,10 +141,17 @@ export function WashingStationDashboard() {
           `Cherry intake logged for farmer ${farmerId}. Process coffee, then scan the pre-printed sack QR.`,
         );
         setActiveSection("sack-qr");
-      } catch {
-        await queueOfflineDelivery(payload);
-        setMessage("Offline — cherry delivery queued for sync.");
-        setActiveSection("offline");
+      } catch (submitError) {
+        if (isOfflineEligibleError(submitError)) {
+          await queueOfflineDelivery(payload);
+          await refreshCount();
+          setMessage(
+            "Could not reach the server — delivery saved locally. Use Sync pending deliveries when the backend is available.",
+          );
+          setActiveSection("offline");
+        } else {
+          setError(getApiErrorMessage(submitError, "Failed to log cherry delivery"));
+        }
       }
     } catch (err) {
       setError(getApiErrorMessage(err, "GPS required for farm provenance"));

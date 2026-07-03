@@ -32,6 +32,21 @@ export function getApiErrorMessage(error: unknown, fallback = "Request failed"):
   return fallback;
 }
 
+/** True when the client could not reach the API — safe to queue for later sync. */
+export function isOfflineEligibleError(error: unknown): boolean {
+  if (typeof navigator !== "undefined" && !navigator.onLine) {
+    return true;
+  }
+  if (isAxiosError(error)) {
+    if (!error.response) {
+      return true;
+    }
+    const status = error.response.status;
+    return status === 408 || status === 502 || status === 503 || status === 504;
+  }
+  return false;
+}
+
 const baseURL = resolveApiBaseUrl();
 
 export const api = axios.create({
