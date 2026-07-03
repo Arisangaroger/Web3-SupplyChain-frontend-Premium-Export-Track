@@ -42,7 +42,7 @@ export function CherryIntakePanel({
   onSubmit,
 }: Props) {
   return (
-    <Card step="A" title="Cherry intake (farm provenance, no QR)" weight="secondary">
+    <Card step="A" title="Cherry intake" weight="secondary">
       <SurfaceInset className="p-4">
         <form onSubmit={onSubmit} className="space-y-3">
           <FarmerSelect

@@ -14,22 +14,22 @@ const PORTAL_META: Record<
 > = {
   "/verify/lot/demo": {
     icon: ScanLine,
-    audience: "Buyers & auditors",
-    highlight: "Whole export batch",
+    audience: "Buyers",
+    highlight: "Full lot",
   },
   "/verify/passport/demo": {
     icon: ShieldCheck,
-    audience: "Importers & retailers",
-    highlight: "Single sack trace",
+    audience: "Importers",
+    highlight: "One sack",
   },
   "/dashboards/lender": {
     icon: Landmark,
-    audience: "Lenders & financiers",
-    highlight: "Farmer credit audit",
+    audience: "Lenders",
+    highlight: "Credit check",
   },
 };
 
-const TRUST_STRIP = ["No account required", "Instant lookup", "Blockchain verified"];
+const TRUST_STRIP = ["No account needed", "Fast lookup", "Blockchain checked"];
 
 export function PublicPortalsSection() {
   return (
@@ -45,13 +45,12 @@ export function PublicPortalsSection() {
 
       <div className="relative mx-auto max-w-7xl px-4 py-16 lg:px-8 lg:py-24">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow text-forest/70">Open access</p>
-          <h2 className="mt-2 text-display-md text-forest sm:text-3xl">
-            Public verification portals
+          <p className="eyebrow text-forest/70">Open pages</p>
+          <h2 className="mt-2 font-display text-display-md text-forest sm:text-3xl">
+            Check coffee online
           </h2>
           <p className="lead mx-auto mt-4">
-            Buyers, importers, lenders, and regulators can verify records immediately. Enter a code
-            or scan a QR — compliance history and blockchain proofs in seconds.
+            Enter a code or scan a QR. See farm data, pay checks, and blockchain proof in seconds.
           </p>
         </div>
 
@@ -76,11 +75,11 @@ export function PublicPortalsSection() {
                   </div>
 
                   <p className="mt-5 text-xs font-medium text-slate-500">{meta.audience}</p>
-                  <h3 className="mt-1 text-lg font-semibold tracking-tight text-forest">{label}</h3>
+                  <h3 className="mt-1 font-display text-lg font-semibold tracking-tight text-forest">{label}</h3>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{description}</p>
 
                   <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-forest transition group-hover:gap-2.5">
-                    Open portal
+                    Open
                     <ArrowRight
                       className="h-4 w-4 transition duration-300 group-hover:translate-x-0.5"
                       aria-hidden

@@ -17,10 +17,10 @@ export function AccessDeniedScreen({ reason, operatorRole }: Props) {
 
   const title = isUnauthenticated ? "Sign in required" : "Access denied";
   const description = isUnauthenticated
-    ? "Operator credentials are needed to open this dashboard. Sign in with your work email to continue."
-    : "Your account role does not include access to this page. Return to your assigned dashboard or sign in with a different operator account.";
+    ? "Sign in with your work email to open this page."
+    : "Your role cannot open this page. Go to your dashboard or sign in with another account.";
   const primaryHref = isUnauthenticated ? "/login" : operatorRole ? roleDashboardPath(operatorRole) : "/";
-  const primaryLabel = isUnauthenticated ? "Go to operator login" : "Go to my dashboard";
+  const primaryLabel = isUnauthenticated ? "Sign in" : "My dashboard";
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-canvas px-4 py-12">
@@ -29,7 +29,7 @@ export function AccessDeniedScreen({ reason, operatorRole }: Props) {
           <Icon className="h-10 w-10 text-red-700/80" strokeWidth={1.5} aria-hidden />
         </div>
         <p className="eyebrow mt-6 text-slate-500">{APP_NAME}</p>
-        <h1 className="mt-2 text-display-md text-slate-900">{title}</h1>
+        <h1 className="mt-2 font-display text-display-md text-slate-900">{title}</h1>
         <p className="type-body mx-auto mt-3 max-w-sm text-slate-600">{description}</p>
         <div className="mt-8 flex flex-col items-center gap-3">
           <Link href={primaryHref}>

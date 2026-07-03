@@ -141,9 +141,8 @@ export function PortDashboard() {
       />
 
       <BodyText muted className="mb-4">
-        Scan the <strong>container or pallet QR</strong> at port clearance. Record the final{" "}
-        <strong>PORT_LOCKED</strong> stage with GPS — the last custody checkpoint before export
-        departure.
+        Scan the <strong>container or pallet QR</strong> at port. Lock the goods with GPS — the
+        last step before export.
       </BodyText>
 
       <PortSectionNav

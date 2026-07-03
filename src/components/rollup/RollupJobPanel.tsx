@@ -124,7 +124,7 @@ export function RollupJobPanel({ washingStationId, defaultTargetPeriod }: Props)
   };
 
   return (
-    <Card title="Monthly Merkle rollup & blockchain anchor" weight="secondary">
+    <Card title="Monthly rollup" weight="secondary">
       {loading ? (
         <LoadingStatePanel label="Computing Merkle root…" />
       ) : rollupResult?.farmerCount != null ? (
@@ -140,7 +140,7 @@ export function RollupJobPanel({ washingStationId, defaultTargetPeriod }: Props)
             compact
             icon="chain"
             title="No rollup run yet"
-            description="Select a target period and run the monthly Merkle rollup to anchor farmer compliance data on Polygon."
+            description="Pick a month and run the rollup to save farmer data on-chain."
           />
         </div>
       )}

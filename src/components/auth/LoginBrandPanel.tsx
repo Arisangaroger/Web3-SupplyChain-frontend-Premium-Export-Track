@@ -2,9 +2,9 @@ import { Leaf } from "lucide-react";
 import { APP_NAME, APP_TAGLINE } from "@/lib/brand";
 
 const HIGHLIGHTS = [
-  "Cherry intake through port clearance",
-  "GPS provenance and on-chain integrity",
-  "Buyer and lender verification portals",
+  "From cherry intake to port",
+  "GPS location on each step",
+  "Public check pages for buyers and lenders",
 ];
 
 export function LoginBrandPanel() {
@@ -19,9 +19,9 @@ export function LoginBrandPanel() {
         </div>
 
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber/90">
-          Rwanda · Specialty Coffee
+          Rwanda · Coffee
         </p>
-        <h1 className="mt-3 text-display-lg text-white lg:text-4xl">{APP_NAME}</h1>
+        <h1 className="mt-3 font-display text-display-lg text-white lg:text-4xl">{APP_NAME}</h1>
         <p className="mt-3 max-w-sm text-sm text-white/65">{APP_TAGLINE}</p>
 
         <ul className="mt-8 space-y-3 border-t border-white/10 pt-8">

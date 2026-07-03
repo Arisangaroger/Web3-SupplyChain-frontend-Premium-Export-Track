@@ -10,17 +10,17 @@ export const PORT_SECTIONS: {
   {
     id: "track-scan",
     label: "Track scan",
-    description: "Scan container or pallet QR and review custody history",
+    description: "Scan code and see history",
   },
   {
     id: "port-clearance",
     label: "Port clearance",
-    description: "Record final port lock with GPS location",
+    description: "Lock goods at port with GPS",
   },
   {
     id: "custody-review",
-    label: "Custody review",
-    description: "Review locked status and full supply chain record",
+    label: "Review record",
+    description: "See full path and locked status",
   },
 ];
 

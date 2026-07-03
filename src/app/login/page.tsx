@@ -32,7 +32,7 @@ export default function LoginPage() {
   }, [router]);
 
   if (redirecting || !sessionChecked) {
-    return <AppLoadingScreen message={redirecting ? "Opening your dashboard" : "Checking session"} />;
+    return <AppLoadingScreen message={redirecting ? "Opening dashboard" : "Please wait"} />;
   }
 
   const onSubmit = async (event: FormEvent) => {
@@ -65,9 +65,9 @@ export default function LoginPage() {
               <ArrowLeft className="h-4 w-4" aria-hidden />
               Back to home
             </Link>
-            <h2 className="mt-4 text-display-md text-slate-900">Operator sign in</h2>
+            <h2 className="mt-4 font-display text-display-md text-slate-900">Sign in</h2>
             <p className="mt-2 text-sm text-slate-600">
-              For washing station, exporter, warehouse, port, and admin accounts.
+              For washing station, exporter, warehouse, port, and admin staff.
             </p>
 
             <form onSubmit={onSubmit} className="mt-6 space-y-4">

@@ -10,17 +10,17 @@ export const WAREHOUSE_SECTIONS: {
   {
     id: "track-scan",
     label: "Track scan",
-    description: "Scan internal TRACK QR and review custody history",
+    description: "Scan tracking code and see history",
   },
   {
     id: "storage-intake",
     label: "Storage intake",
-    description: "Record warehouse stage with GPS location",
+    description: "Mark goods as stored with GPS",
   },
   {
     id: "lot-operations",
     label: "Lot trace",
-    description: "Trace and validate export lots in storage",
+    description: "Trace and check lots in storage",
   },
 ];
 

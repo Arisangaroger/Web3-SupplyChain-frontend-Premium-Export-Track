@@ -1,26 +1,24 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { Afacad, Outfit } from "next/font/google";
 import "./globals.css";
 
-const display = Plus_Jakarta_Sans({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["500", "600", "700", "800"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const afacad = Afacad({
   subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
+  variable: "--font-display",
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Premium Export Track | Supply Chain",
-  description:
-    "Traceable Rwanda coffee supply chain with public verification portals for buyers, lenders, and auditors.",
+  description: "Track Rwanda coffee from farm to export. Public pages to check sacks and lots.",
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/apple-icon.svg", type: "image/svg+xml" }],
@@ -31,9 +29,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${display.variable} ${jetbrainsMono.variable}`}
+      className={`${outfit.variable} ${afacad.variable}`}
     >
-      <body className={`${GeistSans.className} antialiased`}>{children}</body>
+      <body className={`${outfit.className} antialiased`}>{children}</body>
     </html>
   );
 }

@@ -181,9 +181,8 @@ export function ExporterDashboard() {
       />
 
       <BodyText muted className="mb-4">
-        Scan the <strong>internal tracking QR</strong> (TRACK) from the washing station sack.
-        After sort and grade, seal the export lot and issue the public{" "}
-        <strong>buyer passport QR</strong> (PASSPORT) for importers and auditors.
+        Scan the <strong>tracking code</strong> from the washing station sack. After sorting, seal
+        the lot and print the <strong>buyer passport QR</strong> for importers.
       </BodyText>
 
       <StationScopePanel

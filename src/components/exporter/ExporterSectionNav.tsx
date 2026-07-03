@@ -10,17 +10,17 @@ export const EXPORTER_SECTIONS: {
   {
     id: "track-scan",
     label: "Track scan",
-    description: "Scan internal TRACK QR and review supply chain progress",
+    description: "Scan tracking code and see progress",
   },
   {
     id: "buyer-passport",
     label: "Buyer passport",
-    description: "Seal export lot and issue public passport QR",
+    description: "Seal lot and print buyer QR",
   },
   {
     id: "lot-operations",
     label: "Lot operations",
-    description: "Create batches, split, merge, and validate export lots",
+    description: "Create, split, and check export lots",
   },
 ];
 

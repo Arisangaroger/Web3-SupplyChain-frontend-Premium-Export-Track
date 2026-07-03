@@ -137,8 +137,8 @@ export function WarehouseDashboard() {
       />
 
       <BodyText muted className="mb-4">
-        Scan the <strong>internal tracking QR</strong> (TRACK) when goods arrive at the warehouse.
-        Record the storage stage with GPS, then trace or validate export lots held on site.
+        Scan the <strong>tracking code</strong> when goods arrive. Mark them as stored with GPS,
+        then trace or check export lots on site.
       </BodyText>
 
       <WarehouseSectionNav

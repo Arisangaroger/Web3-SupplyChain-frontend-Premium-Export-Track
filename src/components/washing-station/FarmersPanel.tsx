@@ -122,7 +122,7 @@ export function FarmersPanel({
       <Card title="Register farmer" weight="secondary">
         <SurfaceInset className="p-4">
           <BodyText muted className="mb-3">
-            Add cooperative members to this washing station. Each farmer receives a numeric ID for cherry intake.
+            Add farmers for this station. Each one gets a number used at cherry intake.
           </BodyText>
           <form onSubmit={onRegister} className="grid gap-3 sm:grid-cols-2">
             <Input

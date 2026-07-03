@@ -10,27 +10,27 @@ export const WASHING_STATION_SECTIONS: {
   {
     id: "farmers",
     label: "Farmers",
-    description: "Register members and browse station records",
+    description: "Add farmers and view their records",
   },
   {
     id: "intake",
     label: "Cherry intake",
-    description: "Log farm deliveries with GPS provenance",
+    description: "Log cherry deliveries with GPS",
   },
   {
     id: "sack-qr",
     label: "Sack QR",
-    description: "Bind pre-printed tracking codes to processed sacks",
+    description: "Scan sack sticker and link to farmer",
   },
   {
     id: "rollup",
     label: "Monthly rollup",
-    description: "Merkle rollup and on-chain anchor",
+    description: "Sum monthly data and save on-chain",
   },
   {
     id: "offline",
     label: "Offline queue",
-    description: "Sync deliveries captured without connectivity",
+    description: "Sync deliveries saved without internet",
   },
 ];
 

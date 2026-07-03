@@ -205,7 +205,7 @@ export function WashingStationDashboard() {
         }
       }
     } catch (err) {
-      setError(getApiErrorMessage(err, "GPS required for farm provenance"));
+      setError(getApiErrorMessage(err, "GPS is required"));
     }
   };
 
@@ -251,10 +251,9 @@ export function WashingStationDashboard() {
       />
 
       <BodyText muted className="mb-4">
-        Farmers deliver harvest only — no QR at farm. After processing, scan the{" "}
-        <strong>pre-printed tracking QR</strong> on each export sack to bind it to farmer data.
-        Exporter, warehouse, and port continue using this internal TRACK code. The public buyer
-        passport QR is issued later at exporter.
+        Farmers deliver cherries only — no QR at the farm. After processing, scan the{" "}
+        <strong>sack QR sticker</strong> to link the sack to the farmer. Exporter, warehouse, and
+        port use the same tracking code. The buyer passport QR is added at export.
       </BodyText>
 
       <StationScopePanel

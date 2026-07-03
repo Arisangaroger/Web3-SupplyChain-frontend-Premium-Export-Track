@@ -54,14 +54,14 @@ export function SackQrPanel({
     <div className="space-y-6">
       <Card
         step="B"
-        title="Scan pre-printed tracking QR on sack"
+        title="Scan sack QR"
         weight="primary"
         badge="Current step"
       >
         <SurfaceInset className="space-y-3 p-4">
-          <QrScanner onScan={onScan} title="Scan pre-printed TRACK sticker" />
+          <QrScanner onScan={onScan} title="Scan sack sticker" />
           <Input
-            label="Or enter tracking code manually"
+            label="Or type tracking code"
             mono
             value={trackingCode}
             onChange={(e) => onTrackingCodeChange(e.target.value)}
@@ -76,7 +76,7 @@ export function SackQrPanel({
             onGoToFarmersTab={onGoToFarmersTab}
           />
           <Input
-            label="Processed green coffee weight (kg)"
+            label="Green coffee weight (kg)"
             mono
             value={sackWeightKg}
             onChange={(e) => onSackWeightKgChange(e.target.value)}
@@ -84,21 +84,20 @@ export function SackQrPanel({
             required
           />
           <BodyText muted className="text-xs leading-relaxed">
-            Weight of this sack <strong>after</strong> washing, pulping, and drying — not the fresh
-            cherry weight from intake. Cherry often loses roughly half its weight during processing
-            (e.g. 120 kg cherries → ~60 kg green coffee in the sack).
+            Weight after washing and drying — not the fresh cherry weight. Example: 120 kg cherries
+            often become about 60 kg green coffee in one sack.
           </BodyText>
           <Button
             onClick={onRegister}
             disabled={geoLoading || !isReady || !farmerId || !sackWeightKg.trim()}
           >
-            {geoLoading ? "Capturing GPS..." : "Register tracking QR + GPS"}
+            {geoLoading ? "Getting GPS..." : "Save sack + GPS"}
           </Button>
           {registeredSack ? (
             <div className="space-y-3">
               <QrCodeDisplay
                 value={registeredSack.trackingQrPayload}
-                label="Internal TRACK QR — affix to sack"
+                label="Sack QR code"
               />
               <p className="text-xs text-slate-600">
                 Code:{" "}
@@ -110,7 +109,7 @@ export function SackQrPanel({
       </Card>
 
       {registeredSack?.timeline ? (
-        <Card title="Sack lifecycle (internal tracking)" weight="secondary">
+        <Card title="Sack timeline" weight="secondary">
           <LifecycleTimeline
             currentStage={registeredSack.timeline.currentStage as "AT_WASHING_STATION"}
             locked={registeredSack.timeline.locked}

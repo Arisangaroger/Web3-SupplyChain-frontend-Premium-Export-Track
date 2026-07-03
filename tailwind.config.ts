@@ -32,9 +32,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "var(--font-geist-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-jetbrains-mono)", "ui-monospace", "monospace"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "var(--font-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-display)", "ui-monospace", "monospace"],
       },
       fontSize: {
         "display-lg": ["2.25rem", { lineHeight: "1.15", letterSpacing: "-0.03em" }],

@@ -23,7 +23,7 @@ export function StationScopePanel({
     return (
       <Card title="Your washing station" weight="tertiary" className="mb-6">
         <TypeLabel className="font-data text-forest">
-          Station ID: <strong>{stationId}</strong> — deliveries are logged to this station automatically.
+          Station ID: <strong>{stationId}</strong> — deliveries use this station automatically.
         </TypeLabel>
       </Card>
     );
